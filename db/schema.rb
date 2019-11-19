@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_045053) do
+ActiveRecord::Schema.define(version: 2019_11_19_083545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_045053) do
 
   create_table "lessons", force: :cascade do |t|
     t.text "objective"
-    t.datetime "start_time"
+    t.datetime "start_time", default: "2019-11-19 08:21:06"
     t.datetime "end_time"
     t.bigint "scheduled_lesson_id"
     t.datetime "created_at", null: false
@@ -88,8 +88,20 @@ ActiveRecord::Schema.define(version: 2019_11_19_045053) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "student_number"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "description"
+    t.date "due_date"
+    t.bigint "attendance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendance_id"], name: "index_tasks_on_attendance_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -100,6 +112,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_045053) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -113,4 +127,5 @@ ActiveRecord::Schema.define(version: 2019_11_19_045053) do
   add_foreign_key "lesson_sections", "lessons"
   add_foreign_key "lessons", "scheduled_lessons"
   add_foreign_key "scheduled_lessons", "courses"
+  add_foreign_key "tasks", "attendances"
 end
