@@ -1,14 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway:700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Raleway:700&display=swap");
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
 }
-
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
-
 .navbar-lewagon .navbar-brand {
-  font-family: 'Montserrat', sans-serif;
-  
+  font-family: "Montserrat", sans-serif;
 }
