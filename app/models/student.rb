@@ -13,12 +13,12 @@ class Student < ApplicationRecord
   has_many :attendances
   has_many :enrollments
 
-
-  def full_name
-    "#{self.first_name} #{self.last_name}"
+  def self.full_name
+    "#{first_name} #{last_name}"
   end
 
-  def photo_blank?
-    self.photo.blank?
+  def self.photo_blank?
+    photo.blank?
   end
+
 end
