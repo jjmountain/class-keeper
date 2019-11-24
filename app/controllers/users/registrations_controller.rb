@@ -1,12 +1,14 @@
 # frozen_string_literal: true
+require 'pry'
 
-class Students::RegistrationsController < Devise::RegistrationsController
+
+class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
-    @is_student = true
+    @is_student = false
     super
   end
 
@@ -39,11 +41,11 @@ class Students::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :gender, :student_number, :photo, :photo_cache])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -52,9 +54,10 @@ class Students::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    courses_index_path
+    # super(resource)
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
