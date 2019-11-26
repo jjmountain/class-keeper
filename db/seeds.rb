@@ -26,16 +26,29 @@ teacher.save
 
 puts 'User created!'
 
+puts 'Creating Schools'
+
+school = School.create(
+  name: 'Chuo University',
+  campus: 'Tama'
+)
+
+
+
+period_3 = 
+
 puts 'Creating courses'
 
 course = Course.new(
   name: 'Academic Writing',
   faculty: 'Global Management',
   school: 'Chuo University',
+  start_date: Date.new(2019, 9, 25),
+  end_date: Date.new(2020, 1, 8),
+  max_absences: 5
 )
 
 course.user = teacher
 course.save
 
-
-)
+puts 'added course'

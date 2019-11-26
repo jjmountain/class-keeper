@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_165656) do
+ActiveRecord::Schema.define(version: 2019_11_25_050330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,8 @@ ActiveRecord::Schema.define(version: 2019_11_24_165656) do
     t.datetime "updated_at", null: false
     t.string "school"
     t.string "faculty"
-    t.date "year"
+    t.date "start_date"
+    t.date "end_date"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
@@ -65,12 +66,22 @@ ActiveRecord::Schema.define(version: 2019_11_24_165656) do
 
   create_table "lessons", force: :cascade do |t|
     t.text "objective"
-    t.datetime "start_time", default: "2019-11-23 01:50:29"
+    t.datetime "start_time", default: "2019-11-25 04:44:40"
     t.datetime "end_time"
     t.bigint "scheduled_lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["scheduled_lesson_id"], name: "index_lessons_on_scheduled_lesson_id"
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.integer "period_number"
+    t.time "start_time"
+    t.time "end_time"
+    t.bigint "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_periods_on_school_id"
   end
 
   create_table "scheduled_lessons", force: :cascade do |t|
@@ -81,6 +92,13 @@ ActiveRecord::Schema.define(version: 2019_11_24_165656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_scheduled_lessons_on_course_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.string "campus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -132,6 +150,7 @@ ActiveRecord::Schema.define(version: 2019_11_24_165656) do
   add_foreign_key "grade_sections", "enrollments"
   add_foreign_key "lesson_sections", "lessons"
   add_foreign_key "lessons", "scheduled_lessons"
+  add_foreign_key "periods", "schools"
   add_foreign_key "scheduled_lessons", "courses"
   add_foreign_key "tasks", "attendances"
 end
