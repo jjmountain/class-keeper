@@ -28,14 +28,27 @@ puts 'User created!'
 
 puts 'Creating Schools'
 
-school = School.create(
+school_1 = School.create(
   name: 'Chuo University',
   campus: 'Tama'
 )
 
+school_2 = School.create(
+  name: 'J.F Oberlin University',
+  campus: 'Shin Okubo'
+)
 
+school_3 = School.create(
+  name: 'Mode University',
+  campus: 'Shinjuku'
+)
 
-period_3 = 
+puts 'Creating Periods'
+
+period_3 = Period.new(
+  period_number: 3,
+  start_time: 
+)
 
 puts 'Creating courses'
 
@@ -49,6 +62,7 @@ course = Course.new(
 )
 
 course.user = teacher
+course.school = school_1
 course.save
 
 puts 'added course'
