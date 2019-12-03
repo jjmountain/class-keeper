@@ -1,3 +1,25 @@
 <div class="container">
   <h1 style='display: inline;'>Courses</h1><button class='btn btn-ghost float-right'>Add a course</button>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <% current_user.schools.each_with_index do | school, index |  %>
+      <li class="nav-item">
+        <a class="nav-link <%= index == 0 ? 'active' : '' %>" id="<%= school.id %>-tab" data-toggle="tab" href="#tab<%= school.id %>" role="tab" aria-controls="<%= school.id %>" aria-selected="true"><%= school.name %></a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <% current_user.schools.each_with_index do | school, index | %>
+      <div class="tab-pane fade show <%= index == 0 ? 'active' : '' %>" id="tab<%= school.id %>" role="tabpanel" aria-labelledby="<%= school.id %>-tab">
+        <div class="row">
+          <% current_user.courses.each do | course | %>
+            <% if course.school == school %>
+              <%= render partial: "course_card", locals: { course: course } %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+  </div>
 </div>

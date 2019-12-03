@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'courses/index'
+  get 'courses/:id', to: 'courses#show', as: :course
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

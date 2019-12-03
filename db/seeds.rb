@@ -26,6 +26,14 @@ teacher.save
 
 puts 'User created!'
 
+puts 'Destroying Schools, Periods, Courses'
+
+School.destroy_all
+Period.destroy_all
+Course.destroy_all
+
+puts 'Successfully destroyed Schools, Periods, Courses'
+
 puts 'Creating Schools'
 
 chuo = School.create(
@@ -73,7 +81,8 @@ course_1 = Course.new(
   faculty: 'Global Management',
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 1, 8),
-  max_absences: 5
+  max_absences: 5,
+  description: 'Academic Writing Class - second semester'
 )
 
 course_2 = Course.new(
@@ -81,7 +90,8 @@ course_2 = Course.new(
   faculty: 'Global Management',
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 1, 8),
-  max_absences: 5
+  max_absences: 5,
+  description: 'Academic Writing Class - second semester'
 )
 
 course_3 = Course.new(
@@ -89,20 +99,25 @@ course_3 = Course.new(
   faculty: 'Liberal Arts',
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 2, 4),
-  max_absences: 5
+  max_absences: 5,
+  description: 'General English Class'
+
 )
 
 course_1.user = teacher
+course_1.school = chuo
 course_1.period = chuo_period_3
 course_1.save
 
 course_2.user = teacher
+course_2.school = chuo
 course_2.period = chuo_period_4
 course_2.save
 
 course_3.user = teacher
+course_3.school = mode
 course_3.period = mode_period_1
 course_3.save
 
-puts 'added course'
+puts 'Successfully added courses!'
 
