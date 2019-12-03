@@ -28,41 +28,81 @@ puts 'User created!'
 
 puts 'Creating Schools'
 
-school_1 = School.create(
+chuo = School.create(
   name: 'Chuo University',
   campus: 'Tama'
 )
 
-school_2 = School.create(
+oberlin = School.create(
   name: 'J.F Oberlin University',
   campus: 'Shin Okubo'
 )
 
-school_3 = School.create(
+mode = School.create(
   name: 'Mode University',
   campus: 'Shinjuku'
 )
 
 puts 'Creating Periods'
 
-period_3 = Period.new(
+chuo_period_3 = Period.create(
   period_number: 3,
-  start_time: 
+  start_time: '13:20:00',
+  end_time: '15:00:00',
+  school: chuo
+)
+
+chuo_period_4 = Period.create(
+  period_number: 4,
+  start_time: '15:10:00',
+  end_time: '16:50:00',
+  school: chuo
+)
+
+mode_period_1 = Period.create(
+  period_number: 1,
+  start_time: '9:20:00',
+  end_time: '10:50:00',
+  school: mode
 )
 
 puts 'Creating courses'
 
-course = Course.new(
+course_1 = Course.new(
   name: 'Academic Writing',
   faculty: 'Global Management',
-  school: 'Chuo University',
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 1, 8),
   max_absences: 5
 )
 
-course.user = teacher
-course.school = school_1
-course.save
+course_2 = Course.new(
+  name: 'Academic Writing',
+  faculty: 'Global Management',
+  start_date: Date.new(2019, 9, 25),
+  end_date: Date.new(2020, 1, 8),
+  max_absences: 5
+)
+
+course_3 = Course.new(
+  name: 'General English',
+  faculty: 'Liberal Arts',
+  start_date: Date.new(2019, 9, 25),
+  end_date: Date.new(2020, 2, 4),
+  max_absences: 5
+)
+
+course_1.user = teacher
+course_1.period = chuo_period_3
+course_1.save
+
+course_2.user = teacher
+course_2.period = chuo_period_4
+course_2.save
+
+course_3.user = teacher
+course_3.period = mode_period_1
+course_3.save
 
 puts 'added course'
+

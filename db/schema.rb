@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_004907) do
+ActiveRecord::Schema.define(version: 2019_12_03_130758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,25 +24,17 @@ ActiveRecord::Schema.define(version: 2019_11_26_004907) do
     t.index ["student_id"], name: "index_attendances_on_student_id"
   end
 
-  create_table "campus", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.bigint "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_campus_on_school_id"
-  end
-
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.integer "max_abscences"
+    t.integer "max_absences"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "school"
     t.string "faculty"
     t.date "start_date"
     t.date "end_date"
+    t.bigint "period_id"
+    t.index ["period_id"], name: "index_courses_on_period_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
@@ -75,7 +67,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_004907) do
 
   create_table "lessons", force: :cascade do |t|
     t.text "objective"
-    t.datetime "start_time", default: "2019-11-25 04:44:40"
+    t.datetime "start_time", default: "2019-12-03 12:53:46"
     t.datetime "end_time"
     t.bigint "scheduled_lesson_id"
     t.datetime "created_at", null: false
@@ -106,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_004907) do
   create_table "schools", force: :cascade do |t|
     t.string "name"
     t.string "campus"
+    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -153,7 +146,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_004907) do
 
   add_foreign_key "attendances", "lessons"
   add_foreign_key "attendances", "students"
-  add_foreign_key "campus", "schools"
+  add_foreign_key "courses", "periods"
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
