@@ -10,11 +10,11 @@ class User < ApplicationRecord
   
   # return the school objects for the teacher
   def schools
-    School.joins(periods: [:courses]).where(courses: {user_id: self.id}).uniq
+    School.joins(:courses).where(courses: {user_id: self.id}).uniq
   end
   
   # return the course objects for a given school
-  def courses_for_school(school)
-    Course.joins(period: [:school]).where()
+  def courses_for_school(school_id)
+    Course.joins(period: [:school]).where(user_id: self.id).where()
   end
 end
