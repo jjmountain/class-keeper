@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  get 'courses/index'
-  get 'courses/:id', to: 'courses#show', as: :course
+  # get 'courses/index'
+  # get 'courses/:id', to: 'courses#show', as: :course
+  resources :courses, only: [ :index, :show, :new, :create, :edit, :update ]
+
+  resources :schools, only: [] do
+    resources :faculties, only: :index
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

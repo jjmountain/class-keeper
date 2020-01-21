@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <% if user_signed_in? || student_signed_in? %>
-  <%= link_to courses_index_path, class: "navbar-brand" do %>
+  <%= link_to courses_path, class: "navbar-brand" do %>
     <span class="fas fa-school mr-2"></span> classkeeper 
   <% end %>
   <% else %>

@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>New Course</h1>
+  <%= simple_form_for(@course) do |f| %>
+    <%= f.input :school, 
+      collection: School.select_value,
+      selected:  @course&.school&.id,
+      include_blank: true,
+      input_html: { class: 'remote-select', data: { target: '#course_faculty_id' } }      
+    %>
+    <%= f.input :faculty,
+      collection: Faculty.select_values(@course&.school)    %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <div class="form-actions">
+      <%= f.button :submit, "Register", class: 'btn btn-gradient' %>
+    </div>
+  <% end %>
+</div>

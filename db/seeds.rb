@@ -31,6 +31,7 @@ School.destroy_all
 CoursePeriod.destroy_all
 Period.destroy_all
 Course.destroy_all
+Faculty.destroy_all
 
 puts 'Successfully destroyed Schools, Periods, Courses, CoursePeriods'
 
@@ -46,21 +47,23 @@ oberlin = School.create(
   campus: 'Shin Okubo'
 )
 
-mode = School.create(
-  name: 'Mode University',
-  campus: 'Shinjuku'
+puts "Creating Faculties"
+
+glomac = Faculty.create(
+  school: chuo,
+  name: 'Global Management'
 )
 
-meigaku = School.create(
-  name: "Meiji Gakuin",
-  campus: 'Totsuka'
+bm = Faculty.create(
+  school: oberlin,
+  name: "Business Management"
 )
 
 puts 'Creating courses'
 
 course_1 = Course.new(
   name: 'Academic Writing',
-  faculty: 'Global Management',
+  faculty: glomac,
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 1, 8),
   max_absences: 5,
@@ -69,7 +72,7 @@ course_1 = Course.new(
 
 course_2 = Course.new(
   name: 'Academic Writing',
-  faculty: 'Global Management',
+  faculty: glomac,
   start_date: Date.new(2019, 9, 25),
   end_date: Date.new(2020, 1, 8),
   max_absences: 5,
@@ -77,21 +80,12 @@ course_2 = Course.new(
 )
 
 course_3 = Course.new(
-  name: 'General English',
-  faculty: 'Liberal Arts',
+  name: 'Core B',
+  faculty: bm,
   start_date: Date.new(2019, 9, 25),
-  end_date: Date.new(2020, 2, 4),
+  end_date: Date.new(2020, 1, 8),
   max_absences: 5,
-  description: 'General English Class'
-)
-
-course_4 = Course.new(
-  name: 'Critical Writing and Inquiry',
-  faculty: 'International Studies',
-  start_date: Date.new(2019, 9, 25),
-  end_date: Date.new(2020, 2, 4),
-  max_absences: 5,
-  description: 'Essay writing class for KC students.'
+  description: 'Academic Writing Class - second semester'
 )
 
 puts 'Creating Periods'
@@ -110,20 +104,12 @@ chuo_period_4 = Period.create(
   school: chuo
 )
 
-mode_period_1 = Period.create(
-  period_number: 1,
-  start_time: '9:20:00',
-  end_time: '10:50:00',
-  school: mode
+oberlin_period_3 = Period.create(
+  period_number: 3,
+  start_time: '13:10:00',
+  end_time: '14:50:00',
+  school: oberlin
 )
-
-meigaku_period_1 = Period.create(
-  period_number: 1,
-  start_time: '9:00:00',
-  end_time: '10:30:00',
-  school: meigaku
-)
-
 
 puts ""
 
@@ -136,12 +122,9 @@ course_2.school = chuo
 course_2.save
 
 course_3.user = teacher
-course_3.school = mode
+course_3.school = oberlin
 course_3.save
 
-course_4.user = teacher
-course_4.school = meigaku
-course_4.save
 
 puts 'Successfully added courses!'
 
@@ -164,29 +147,12 @@ academic_writing_4.period = chuo_period_4
 academic_writing_4.course = course_2
 academic_writing_4.save
 
-general_1 = CoursePeriod.create(
-  day: 1
-)
-general_1.period = mode_period_1
-general_1.course = course_3
-general_1.save
-
-meigaku_1 = CoursePeriod.create(
-  day: 1
-)
-
-meigaku_1.period = meigaku_period_1
-meigaku_1.course = course_4
-meigaku_1.save
-
-
-meigaku_2 = CoursePeriod.create(
+bm_3 = CoursePeriod.create(
   day: 4
 )
-
-meigaku_2.period = meigaku_period_1
-meigaku_2.course = course_4
-meigaku_2.save
+bm_3.period = oberlin_period_3
+bm_3.course = course_3
+bm_3.save
 
 puts "CoursePeriods Created!"
 

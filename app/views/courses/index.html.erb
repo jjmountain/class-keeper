@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 style='display: inline-block; margin-bottom: 2rem;'>Courses</h1><button class='btn btn-ghost float-right'>Add a course</button>
+  <h1 style='display: inline-block; margin-bottom: 2rem;'>Courses</h1><%= link_to new_course_path do %><button class='btn btn-ghost float-right'>Add a course</button><% end %>
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <% current_user.schools.each_with_index do | school, index |  %>

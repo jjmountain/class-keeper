@@ -1,0 +1,6 @@
+class FacultiesController < ApplicationController
+  def index
+    school = School.includes(:faculties).find(params[:school_id])
+    render json: school.faculties.select(:name, :id).map { |f| { id: f.id, name: f.name }}
+  end
+end
