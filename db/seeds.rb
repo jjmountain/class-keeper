@@ -19,8 +19,7 @@ teacher = User.new(
   email: 'freewaytofluency@gmail.com',
   password: 'secret'
 )
-
-teacher.remote_photo_url = 'app/assets/images/me.jpeg'
+teacher.photo.attach(io: File.open('app/assets/images/me.jpeg'), filename: 'me.jpeg', content_type: 'image/jpg')
 
 teacher.save
 

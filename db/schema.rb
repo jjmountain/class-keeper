@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_014839) do
+ActiveRecord::Schema.define(version: 2020_01_21_041556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "attendances", force: :cascade do |t|
     t.bigint "lesson_id"
@@ -78,7 +99,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_014839) do
 
   create_table "lessons", force: :cascade do |t|
     t.text "objective"
-    t.datetime "start_time", default: "2019-12-03 12:53:46"
+    t.datetime "start_time", default: "2020-01-21 03:56:06"
     t.datetime "end_time"
     t.bigint "scheduled_lesson_id"
     t.datetime "created_at", null: false
@@ -93,8 +114,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_014839) do
     t.bigint "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "course_id"
     t.integer "day"
+    t.bigint "course_id"
     t.index ["course_id"], name: "index_periods_on_course_id"
     t.index ["school_id"], name: "index_periods_on_school_id"
   end

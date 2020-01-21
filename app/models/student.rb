@@ -3,7 +3,7 @@ class Student < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
-  mount_uploader :photo, PhotoUploader
+  # mount_uploader :photo, PhotoUploader
   validates :student_number, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
