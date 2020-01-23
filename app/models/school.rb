@@ -2,6 +2,7 @@ class School < ApplicationRecord
   has_many :periods, dependent: :destroy
   has_many :courses
   has_many :faculties
+  has_many :semesters
 
   def self.select_value
     School.all.map { |school| [school.name, school.id, { data: { url: data_url(school) }}] }
