@@ -1,0 +1,28 @@
+<div class="container">
+ <div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+    
+  <h1>New Course</h1>
+  <%= simple_form_for(@semester) do |f| %>
+    <%= f.input :school, 
+      collection: School.select_value,
+      selected:  @course&.school&.id,
+      include_blank: true,
+      input_html: { class: 'remote-select', data: { target: '#course_faculty' } }      
+    %>
+    <%= f.input :faculty,
+      collection: Faculty.select_values(@course&.school)    %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <div class="d-flex justify-content-between">
+      <%= f.input :start_date, as: :string, input_html: { class: 'datepicker' } %>
+      <%= f.input :end_date, as: :string, input_html: { class: 'datepicker' } %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Register", class: 'btn btn-gradient' %>
+    </div>
+  <% end %>
+
+    </div>
+  </div>
+</div>

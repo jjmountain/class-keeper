@@ -2,25 +2,6 @@
 //= require rails-ujs
 //= require_tree .
 
-// const remoteSelect = document.querySelector('.remote-select');
-// remoteSelect.addEventListener('change', () => {
-//   const target = remoteSelect.dataset.target
-//   console.log(target)
-//   const url = remoteSelect.options[remoteSelect.selectedIndex].dataset.url
-  
-//   if (url) {
-//     fetch(url)
-//       .then(data => {
-//         const target_select = document.querySelector('#course_faculty')
-//         console.log(target_select)
-
-//       }).catch(error => {
-
-//       });
-//     }
-//   })
-
-
 
 $(function () {
   $(document).on('change', '.remote-select', function (e) {

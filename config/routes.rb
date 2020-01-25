@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :faculties, only: :index
   end
 
+  resources :semesters, only: [ :new, :create, :edit, :update]
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

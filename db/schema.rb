@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_101932) do
+ActiveRecord::Schema.define(version: 2020_01_23_150602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 2020_01_22_101932) do
     t.bigint "school_id"
     t.boolean "archived", default: false
     t.bigint "faculty_id"
+    t.integer "lessons_per_week", default: 1
+    t.integer "weeks_per_course", default: 14
+    t.integer "class_number"
+    t.string "class_type"
     t.index ["faculty_id"], name: "index_courses_on_faculty_id"
     t.index ["school_id"], name: "index_courses_on_school_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
