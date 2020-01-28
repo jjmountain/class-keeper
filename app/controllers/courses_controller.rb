@@ -10,12 +10,28 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-    @semesters = Semester.all
   end
 
   def create
-    @course = Course.new(course_params)
-
+    course_params
+    @course = Course.new(
+      name: course_params[:name], 
+      description: course_params[:description], 
+      start_date: course_params[:start_date], 
+      end_date: course_params[:end_date], 
+      class_type: course_params[:class_type],
+      class_number: course_params[:class_number],
+      lessons_per_week: course_params[:lessons_per_week],
+      weeks_per_course: course_params[:weeks_per_course]
+    )
+    @course.user = current_user
+    @course.school_id = params[:school].to_i
+    @course.faculty_id = params[:faculty].to_i
+    if @course.save
+      redirect_to course_path(@course)
+    else
+      render 'new'
+    end
   end
   
   private

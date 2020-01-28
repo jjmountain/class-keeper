@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_150602) do
+ActiveRecord::Schema.define(version: 2020_01_28_072533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,10 +116,11 @@ ActiveRecord::Schema.define(version: 2020_01_23_150602) do
     t.text "objective"
     t.datetime "start_time", default: "2020-01-21 03:56:06"
     t.datetime "end_time"
-    t.bigint "scheduled_lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["scheduled_lesson_id"], name: "index_lessons_on_scheduled_lesson_id"
+    t.interval "duration"
+    t.bigint "courses_id"
+    t.index ["courses_id"], name: "index_lessons_on_courses_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -150,26 +151,6 @@ ActiveRecord::Schema.define(version: 2020_01_23_150602) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "semester_courses", force: :cascade do |t|
-    t.string "name"
-    t.bigint "course_id"
-    t.bigint "semester_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_semester_courses_on_course_id"
-    t.index ["semester_id"], name: "index_semester_courses_on_semester_id"
-  end
-
-  create_table "semesters", force: :cascade do |t|
-    t.string "name"
-    t.date "start_date"
-    t.date "end_date"
-    t.bigint "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_semesters_on_school_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -225,12 +206,9 @@ ActiveRecord::Schema.define(version: 2020_01_23_150602) do
   add_foreign_key "faculties", "schools"
   add_foreign_key "grade_sections", "enrollments"
   add_foreign_key "lesson_sections", "lessons"
-  add_foreign_key "lessons", "scheduled_lessons"
+  add_foreign_key "lessons", "courses", column: "courses_id"
   add_foreign_key "periods", "courses"
   add_foreign_key "periods", "schools"
   add_foreign_key "scheduled_lessons", "courses"
-  add_foreign_key "semester_courses", "courses"
-  add_foreign_key "semester_courses", "semesters"
-  add_foreign_key "semesters", "schools"
   add_foreign_key "tasks", "attendances"
 end

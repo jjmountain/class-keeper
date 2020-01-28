@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  get 'lessons/index'
+  get 'lessons/show'
+  get 'lessons/new'
+  get 'lessons/create'
+  get 'lessons/destroy'
   # get 'courses/index'
   # get 'courses/:id', to: 'courses#show', as: :course
-  resources :courses, only: [ :index, :show, :new, :create, :edit, :update ]
+  resources :courses, only: [ :index, :show, :new, :create, :edit, :update ] do
+    resources :lessons, only: [ :index, :show, :new, :create, :edit, :update ]    
+  end
+
 
   resources :schools, only: [] do
     resources :faculties, only: :index
