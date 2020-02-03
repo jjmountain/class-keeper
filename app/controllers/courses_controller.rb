@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show]
+  before_action :set_course, only: [:show, :edit, :update]
 
   def index
     @courses = Course.where(user: current_user)
@@ -31,6 +31,33 @@ class CoursesController < ApplicationController
       redirect_to course_path(@course)
     else
       render 'new'
+    end
+  end
+
+  def edit
+   @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    @course.update(
+      name: course_params[:name], 
+      description: course_params[:description], 
+      start_date: course_params[:start_date], 
+      end_date: course_params[:end_date], 
+      class_type: course_params[:class_type],
+      class_number: course_params[:class_number],
+      lessons_per_week: course_params[:lessons_per_week],
+      weeks_per_course: course_params[:weeks_per_course]
+    )
+    @course.user = current_user
+    @course.school_id = course_params[:school].to_i
+    @course.faculty_id = course_params[:faculty].to_i
+
+    if @course.save
+      redirect_to course_path(@course), notice: 'Course successfully updated!'
+    else
+      render 'edit'
     end
   end
 

@@ -1,0 +1,31 @@
+<%= simple_form_for(@course) do |f| %>
+    <%= f.input :school, 
+      collection: School.select_value,
+      selected:  @course&.school&.id,
+      include_blank: false,
+      input_html: { class: 'remote-select', data: { target: '#course_faculty' } }      
+    %>
+    <%= f.input :faculty,
+      collection: Faculty.select_values(@course&.school),
+      selected: @course&.faculty&.id
+    %>
+    <%= f.input :name, label: 'Course Name' %>
+    <%= f.input :class_number, label: 'Class Number' %>
+    <%= f.input :class_type, collection: ['Speaking', 'Writing'], include_blank: false, label: 'Class Focus' %>
+
+
+    <%= f.input :description %>
+    <div class="d-flex justify-content-between">
+      <%= f.input :start_date, label: 'First Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
+      <%= f.input :end_date, label: 'Final Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
+    </div>
+    <div class="d-flex justify-content-between">
+      <%= f.input :lessons_per_week, label: 'Lessons per week', input_html: { class: 'w-10' } %>
+      <%= f.input :weeks_per_course, label: 'Weeks in course', input_html: { class: 'w-10' } %>
+
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Register", class: 'btn btn-gradient' %>
+    </div>
+  <% end %>
