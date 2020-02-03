@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_072533) do
+ActiveRecord::Schema.define(version: 2020_02_03_022613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,19 +130,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_072533) do
     t.bigint "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "course_id"
-    t.index ["course_id"], name: "index_periods_on_course_id"
     t.index ["school_id"], name: "index_periods_on_school_id"
-  end
-
-  create_table "scheduled_lessons", force: :cascade do |t|
-    t.interval "duration"
-    t.boolean "completed"
-    t.datetime "start_time"
-    t.bigint "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_scheduled_lessons_on_course_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -207,8 +195,6 @@ ActiveRecord::Schema.define(version: 2020_01_28_072533) do
   add_foreign_key "grade_sections", "enrollments"
   add_foreign_key "lesson_sections", "lessons"
   add_foreign_key "lessons", "courses", column: "courses_id"
-  add_foreign_key "periods", "courses"
   add_foreign_key "periods", "schools"
-  add_foreign_key "scheduled_lessons", "courses"
   add_foreign_key "tasks", "attendances"
 end

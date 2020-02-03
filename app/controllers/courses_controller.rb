@@ -25,13 +25,19 @@ class CoursesController < ApplicationController
       weeks_per_course: course_params[:weeks_per_course]
     )
     @course.user = current_user
-    @course.school_id = params[:school].to_i
-    @course.faculty_id = params[:faculty].to_i
+    @course.school_id = course_params[:school].to_i
+    @course.faculty_id = course_params[:faculty].to_i
     if @course.save
       redirect_to course_path(@course)
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    redirect_to courses_path
   end
   
   private

@@ -12,6 +12,9 @@
     </div>
     <h6 class="card-subtitle mb-2 text-muted"><%= course.faculty.name %></h6>
     <p class="card-text"><%= course.description %></p>
-    <%= link_to "Enter", course_path(course), class: 'card-link' %>
+      <div class='d-flex justify-content-between'>
+        <%= link_to "Enter", course_path(course), class: 'card-link' %>
+        <%= link_to "Delete", course_path(course), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
   </div>
 </div>
