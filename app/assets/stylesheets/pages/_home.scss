@@ -1,10 +1,44 @@
 // Specific CSS for your home-page
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+.navbar-brand {
+  font-family: 'Nunito', sans-serif;
+}
+
+.navbar-brand i {
+  transform: rotate(-20deg);
+  color: darkgoldenrod;
+}
+
+
 .container {
-  margin-top: 5rem;
   min-height: 90vh
 }
 
 .jumbotron {
   background-color: white;
+}
+
+.logo-text {
+  margin-left: .7rem;
+}
+
+ .nav-item > a {
+  color: white;
+  &:hover {
+    color: gold;
+  }
+}
+
+.card-title > a {
+  font-weight: 300;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.btn {
+  color: white;
 }
 

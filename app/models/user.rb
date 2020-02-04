@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def courses_for_school(school_id)
     Course.joins(period: [:school]).where(user_id: self.id).where()
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

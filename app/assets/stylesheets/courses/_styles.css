@@ -1,0 +1,27 @@
+.nav-tabs .nav-link > a {
+  color: white;
+}
+.text-muted {
+  font-weight: 200 !important;
+}
+.course-card-faculty {
+  font-weight: 200;
+}
+.nav-item > a {
+  color: white;
+}
+.nav-item > a:hover {
+  color: gold;
+}
+.card-title > a {
+  font-weight: 400;
+}
+.badge {
+  height: 1.2rem;
+}
+#course-tabs > .nav-item {
+  margin-left: 1rem;
+}
+#course-number-badge {
+  margin-left: 1rem;
+}
