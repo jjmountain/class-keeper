@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   # get 'courses/:id', to: 'courses#show', as: :course
   resources :courses do
     resources :lessons, only: [ :index, :show, :new, :create, :edit, :update ]    
-    resources :enrollments, only: [ :index ]
+    resources :enrollments, only: [ :index ] do 
+      collection { post :import }
+    end
   end
 
   resources :schools, only: [] do
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
   devise_for :students, controllers: { 
     sessions: 'students/sessions',
     registrations: 'students/registrations' 
-  }
+  } 
 
   root to: 'pages#home'
 

@@ -1,11 +1,11 @@
-class Enrollment < ApplicationRecord
-  belongs_to :course
-  belongs_to :student
-  validates :student_id, uniqueness: { scope: :course_id,
-    message: "student is already enrolled in class" }
-  
-  def self.import(file, course_id)
-    CSV.foreach(file.path, headers: true) do |row|
+require 'pry'
+
+namespace :import do
+  desc "Import students from csv"
+  task students: :environment do 
+    counter = 0
+    filename = File.join Rails.root, "students.csv"
+    CSV.foreach(filename, headers: true) do |row|
       kanji_name_array = row['学生氏名'].split('　')
       furigana_name_array = row['フリガナ'].split('　')
       english_name_array = row['Ｎａｍｅ'].split(' ')
@@ -24,14 +24,11 @@ class Enrollment < ApplicationRecord
         'email': email,
         'password': row['学籍番号']
       }
-      student = Student.find_or_create_by(student_number: row['学籍番号'], given_name: english_name_array[1], family_name: english_name_array[0]) do |student|
-        student.password = row['学籍番号'],
-        student.email = email,
-        student.student_number = row['学籍番号']
-      end
+      student = find_or_create_by!(student_number: row['学籍番号'], given_name: english_name_array[1], family_name: english_name_array[0])
       student.update_attributes(student_hash)
-      Enrollment.create(course_id: course_id, student_id: student.id) if student.persisted?
       puts "#{row['Ｎａｍｅ']} - #{student.errors.full_messages.join(',')}" if student.errors.any?
+      counter += 1 if student.persisted?
     end
+    puts "Created #{counter} students!"
   end
 end

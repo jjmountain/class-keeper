@@ -8,13 +8,21 @@
   <% end %>
   <div class="container-fluid mt-n10">
       <div class="card">
-          <div class="card-header">Enrollments</div>
+          <div class="card-header">
+            Enrollments
+          </div>
+            <div class="card-body">
           <% if @course.enrollments.empty? %>
-            <div class="card-body"><p>You have no students enrolled in this course 😔</p>
-            <%= link_to course_enrollments_path(@course), class: 'btn btn-primary shadow-sm' do %>Enroll Some Students
- <% end %>
- </div>
+            <p>You have no students enrolled in this course 😔</p>
           <% end %>
+            <%= link_to course_enrollments_path(@course), class: 'btn btn-primary shadow-sm' do %>Enroll Some Students
+          <% end %>
+            <ol>
+              <% @enrollments.each do | enrollment | %>
+                <li><%= enrollment.student.full_name %></li>
+              <% end %>
+            </ol>
+          </div>
       </div>
   </div>
 </main>

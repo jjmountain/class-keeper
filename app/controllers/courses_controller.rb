@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @enrollments = Enrollment.where(course_id: params[:id])
   end
 
   def new
