@@ -1,0 +1,15 @@
+<main>
+  <%= render layout: 'shared/page_header', locals: { title: @course.name, subtitle: 'Student Enrollment', feather_icon: 'users' } do %>
+    <ol class="breadcrumb mt-4 mb-0">
+        <li class="breadcrumb-item"><%= @course.school.name %></li>
+        <li class="breadcrumb-item"><%= @course.faculty.name %></li>
+        <li class="breadcrumb-item "><%= @course.name %></li>
+    </ol>
+  <% end %>
+  <div class="container-fluid mt-n10">
+      <div class="card">
+          <div class="card-header">Sign up students</div>
+          <div class="card-body">The Bootstrap breadcrumbs component is supported within the page header for the SB Admin Pro theme. The page header on this page is an example of a page with breadcrumbs added!</div>
+      </div>
+  </div>
+</main>

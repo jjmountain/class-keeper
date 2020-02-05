@@ -15,15 +15,6 @@
 .logo-text {
   margin-left: 0.7rem;
 }
-.nav-item > a {
-  color: white;
-}
-.nav-item > a:hover {
-  color: gold;
-}
-.card-title > a {
-  font-weight: 300;
-}
 a:hover {
   text-decoration: none !important;
 }

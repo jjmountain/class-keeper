@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # get 'courses/:id', to: 'courses#show', as: :course
   resources :courses do
     resources :lessons, only: [ :index, :show, :new, :create, :edit, :update ]    
+    resources :enrollments, only: [ :index ]
   end
 
   resources :schools, only: [] do
