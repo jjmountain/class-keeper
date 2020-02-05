@@ -1,3 +1,22 @@
-<div class="container">
-  <h1><%= @course.name %></h1>
-</div>
+ <main>
+  <div class="sb-page-header pb-10 sb-page-header-dark bg-gradient-primary-to-secondary">
+      <div class="container-fluid">
+          <div class="sb-page-header-content py-5">
+              <h1 class="sb-page-header-title">
+                  <div class="sb-page-header-icon">
+                  <i data-feather=<%= @course.class_type == 'speaking' ? 'message-square' : 'pen-tool' %>></i></div>
+                  <span><%= @course.name %></span>
+              </h1>
+              <div class="sb-page-header-subtitle"><%= @course.description %></div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid mt-n10">
+      <div class="card">
+          <div class="card-header">Enrollments</div>
+          <% if @course.enrollments.empty? %>
+            <div class="card-body">You have no students enrolled in this course 😔</div>
+          <% end %>
+      </div>
+  </div>
+</main>
