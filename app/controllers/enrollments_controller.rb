@@ -11,6 +11,6 @@ class EnrollmentsController < ApplicationController
 
   def import
     Enrollment.import(params[:file], params[:course_id].to_i)
-    redirect_to course_enrollments_path(params[:course_id]), notice: "Students imported"
+    redirect_to course_path(params[:course_id]), notice: "Students imported"
   end
 end

@@ -8,7 +8,7 @@ class Student < ApplicationRecord
   validates :given_name, presence: true
   validates :family_name, presence: true
   has_many :attendances
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
 
   def full_name
     "#{given_name} #{family_name}"

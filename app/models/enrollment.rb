@@ -1,3 +1,4 @@
+
 class Enrollment < ApplicationRecord
   belongs_to :course
   belongs_to :student
@@ -29,7 +30,7 @@ class Enrollment < ApplicationRecord
         student.email = email,
         student.student_number = row['学籍番号']
       end
-      student.update_attributes(student_hash)
+      student.update(student_hash)
       Enrollment.create(course_id: course_id, student_id: student.id) if student.persisted?
       puts "#{row['Ｎａｍｅ']} - #{student.errors.full_messages.join(',')}" if student.errors.any?
     end
