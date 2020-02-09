@@ -16,6 +16,11 @@ class Student < ApplicationRecord
     "#{given_name} #{family_name}"
   end
 
+  def full_name_kanji
+    "#{family_name_kanji} #{given_name_kanji}"
+
+  end
+
   def schools
     enrollments.map { |enrollment| enrollment.course.school } 
   end

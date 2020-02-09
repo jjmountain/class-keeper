@@ -62,7 +62,7 @@
       </li>
       <li class="nav-item dropdown no-caret mr-3 sb-dropdown-user">
           <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= cl_image_tag(current_member.photo.key, :transformation=>{height: 40, :gravity=>"face", :crop=>"thumb", radius: "max", quality: 100}) %></a>
+          <%= cl_image_tag(current_member.photo.key, width: 40, :gravity=>"face") %></a>
           <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
               <h6 class="dropdown-header d-flex align-items-center">
                   <div class="sb-dropdown-user-details">
@@ -83,7 +83,8 @@
   </ul>
     </div>
   <% else %>
-  <div class="dropdown dropleft" style='position: fixed; right: 1.8rem; top: 0.8rem;'>
+  <div class='dropleft'>
+  <div class="dropdown" style='position: fixed; right: 1.8rem; top: 0.8rem;'>
     <button class="btn sb-btn-transparent-dark " id="dropdownFadeIn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log In</button>
     <div class="dropdown-menu animated--fade-in border" aria-labelledby="dropdownFadeIn" style='min-width: 8rem;'>
       <%= link_to new_student_session_path, class: "dropdown-item d-flex justify-content-between" do %>
@@ -101,6 +102,7 @@
         Sign Up
         <% end %>
     </div>
+</div>
 </div>
 
   <% end %>

@@ -1,16 +1,19 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
-
 gem 'bootsnap', require: false
 gem 'chosen-rails'
 gem 'cloudinary', '~> 1.12.0'
 gem 'devise'
 gem 'jquery-rails'
+gem 'kaminari'
+gem 'jquery-datatables'
+
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.2.0'
 gem 'redis'
+
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
@@ -33,9 +36,4 @@ group :development, :test do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
-end
-
-source 'https://rails-assets.org' do
-  # gem 'rails-assets-chosen'
-  # gem 'rails-assets-chosen-bootstrap' # if using bootstrap
 end

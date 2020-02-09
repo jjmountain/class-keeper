@@ -10,11 +10,20 @@
     <div class="collapse show" id="collapseLayouts-<%= index %>" data-parent="#accordionSidenav">
         <nav class="sb-sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
           <% school.courses.where(user_id: current_user.id).each do |course| %>
-            <%= link_to course_path(course), class: 'nav-link' do %> 
+            <%= link_to course_path(course), class: 'nav-link' do %>
+            <% icon_type = course.class_type == 'Speaking' ? 'message-circle' : 'edit-2' %>
+            <% course_period_string = '' %>
+            <% if course.course_periods %>
                 <% course.course_periods.each do |course_period| %>
-                  <% icon_type = course.class_type == 'speaking' ? 'message-circle' : 'edit-2' %>
-                  <div class="sb-nav-link-icon"><i data-feather=<%= icon_type %>></i></div><%= course.name %><span class="badge badge-light d-flex align-items-center ml-2"><%= course_period.day %> <%= course_period.period.period_number %></span>
+                 <% course_period_string += course_period.day %> 
+                 <% course_period_string += ' ' + course_period.period.period_number.to_s + ' ' %> 
                 <% end %>
+                  <div class="sb-nav-link-icon"><i data-feather=<%= icon_type %>></i></div><%= course.name %>                  
+                  <% unless course_period_string.empty? %>
+                    <span class="badge badge-light d-flex align-items-center ml-2">
+                    <%= course_period_string %></span>
+                  <% end %>
+            <% end %>
             <% end %>
           <% end %>
         </nav>

@@ -1,6 +1,7 @@
 //= require jquery
 //= require rails-ujs
 //= require_tree .
+//= require datatables
 
 
 $(function () {
@@ -28,3 +29,14 @@ $(function () {
     }
   })
 })
+
+$(document).ready(function() {
+  $("#dttb").dataTable(
+    {
+      "lengthMenu": [[25, -1], [25, "All"]],
+      "scrollY": 200,
+      "paging":   false,
+      "info": false
+    }
+  );
+});

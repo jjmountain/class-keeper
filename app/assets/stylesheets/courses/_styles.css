@@ -22,4 +22,11 @@
 #course-tabs > .nav-item {
   margin-left: 1rem;
 }
-
+#course-number-badge {
+  margin-left: 1rem;
+}
+.edit-button {
+  position: absolute;
+  top: 3rem;
+  right: 2rem;
+}

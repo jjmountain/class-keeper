@@ -1,27 +1,54 @@
  <main>
   <%= render layout: 'shared/page_header', locals: { title: @course.name, feather_icon: 'message-square' } do %>
+        <%= link_to edit_course_path(@course), class: 'btn sb-btn-transparent-light sb-btn-icon edit-button' do %> <i data-feather="edit"></i><% end %>
     <ol class="breadcrumb mt-4 mb-0">
         <li class="breadcrumb-item"><%= @course.school.name %></li>
         <li class="breadcrumb-item"><%= @course.faculty.name %></li>
         <li class="breadcrumb-item active"><%= @course.name %></li>
     </ol>
+
   <% end %>
+
   <div class="container-fluid mt-n10">
       <div class="card">
           <div class="card-header">
-            Enrollments
+            Students
           </div>
             <div class="card-body">
           <% if @course.enrollments.empty? %>
             <p>You have no students enrolled in this course 😔</p>
-          <% end %>
             <%= link_to course_enrollments_path(@course), class: 'btn btn-primary shadow-sm' do %>Enroll Some Students
           <% end %>
-            <ol>
-              <% @enrollments.each do | enrollment | %>
-                <li><%= enrollment.student.full_name %></li>
-              <% end %>
-            </ol>
+
+          <% else %>
+
+        <table id='dttb' class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Student number</th>
+　　　　　　　　　<th>Name in Japanese</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Gender</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @enrollments.each do | enrollment | %>
+            <tr>
+              <td><%= enrollment.student.student_number %></td>
+              <td><%= enrollment.student.full_name_kanji %></td>
+              <td><%= enrollment.student.given_name %></td>
+              <td><%= enrollment.student.family_name %></td>
+              <td><%= enrollment.student.gender %></td>
+              <td><%= enrollment.student.email %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+          <% end %>
+          
           </div>
       </div>
   </div>
