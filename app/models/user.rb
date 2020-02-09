@@ -3,11 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # mount_uploader :photo, PhotoUploader
   has_one_attached :photo
   has_many :courses, dependent: :destroy
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :given_name, presence: true
+  validates :family_name, presence: true
 
   
   # return the school objects for the teacher
@@ -21,6 +20,6 @@ class User < ApplicationRecord
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{given_name} #{family_name}"
   end
 end

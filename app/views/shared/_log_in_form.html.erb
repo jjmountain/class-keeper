@@ -11,6 +11,12 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in", class: 'btn btn-gradient' %>
+    <%= f.button :submit, "Log in", class: 'btn btn-primary' %>
   </div>
+  <%= devise_error_messages! %>
+    <% flash.each do |key, value| %>
+       <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+
+
 <% end %>

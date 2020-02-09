@@ -15,16 +15,17 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    
-    <body class="sb-nav-fixed">
+  <% body_class = member_signed_in? ? 'sb-nav-fixed' : '' %> 
+    <body class=<%= body_class %>>
         <%= render 'layouts/navigations/top_navbar' %>
-        <%= render 'shared/flashes' %>
+        <%= render 'shared/flashes' unless member_signed_in? %>
         <div id="layoutSidenav">
-            <%= render 'layouts/navigations/sidenav' %>
-            <div id="layoutSidenav_content">
-                <%= yield %>
-                <%= render 'layouts/footer' %>
-            </div>
+          <%= render 'layouts/navigations/sidenav' if member_signed_in? %>
+          <div id="layoutSidenav_content">
+            <%= render 'shared/flashes' if member_signed_in? %>
+            <%= yield %>
+          <%= render 'layouts/footer' %>
+          </div>
         </div>
     </body>
     <%= javascript_include_tag 'application' %>

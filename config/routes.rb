@@ -33,5 +33,7 @@ Rails.application.routes.draw do
 
   get 'pages/login', to: 'pages#login'
   get 'pages/signup', to: 'pages#signup'
+  get 'pages/dashboard', to: 'pages#dashboard'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

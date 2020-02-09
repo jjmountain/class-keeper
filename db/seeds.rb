@@ -14,8 +14,8 @@ User.destroy_all
 puts 'Creating User...'
 
 teacher = User.new(
-  first_name: 'James',
-  last_name: 'Devereux',
+  given_name: 'James',
+  family_name: 'Devereux',
   email: 'freewaytofluency@gmail.com',
   password: 'secret'
 )

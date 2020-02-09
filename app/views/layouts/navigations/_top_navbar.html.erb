@@ -1,11 +1,14 @@
 <nav class="sb-topnav navbar navbar-expand shadow navbar-light bg-white" id="sidenavAccordion">
-  <%= link_to courses_path, class: 'navbar-brand d-none d-sm-block' do %><span style="color: darkgoldenrod;"><i class="fas fa-book" style="transform: rotate(-20deg);"></i></span><span class="logo-text">Classkeeper</span><% end %>
+
+  <% path_to_display = member_signed_in? ? pages_dashboard_path : root_path %>
+  
+  <%= link_to path_to_display, class: 'navbar-brand d-none d-sm-block' do %><span style="color: darkgoldenrod;"><i class="fas fa-book" style="transform: rotate(-20deg);"></i></span><span class="logo-text">Classkeeper</span><% end %>
+  
+  <% if user_signed_in? || student_signed_in? %>
+  <div class="d-flex justify-content-between w-100">
   <button class="btn sb-btn-icon sb-btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle" href="#"><i data-feather="menu"></i></button>
-  <form class="form-inline mr-auto d-none d-lg-block"><input class="form-control sb-form-control-solid mr-sm-2" type="search" placeholder="Search" aria-label="Search" /></form>
-  <form class="form-inline ml-auto mr-3">
-      
-  </form>
-  <ul class="navbar-nav align-items-center">
+
+<ul class="navbar-nav align-items-center">
       <li class="nav-item dropdown no-caret mr-3 sb-dropdown-notifications">
           <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
           <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
@@ -37,6 +40,7 @@
               ><a class="dropdown-item sb-dropdown-notifications-footer" href="javascript:void(0);">View All Alerts</a>
           </div>
       </li>
+
       <li class="nav-item dropdown no-caret mr-3 sb-dropdown-notifications">
           <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
           <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
@@ -57,12 +61,12 @@
           </div>
       </li>
       <li class="nav-item dropdown no-caret mr-3 sb-dropdown-user">
-          <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= cl_image_tag(current_user.photo.key, height: 60, width: 60, class: 'img-fluid') %></a>
+          <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= cl_image_tag(current_member.photo.key, :transformation=>{height: 40, :gravity=>"face", :crop=>"thumb", radius: "max", quality: 100}) %></a>
           <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
               <h6 class="dropdown-header d-flex align-items-center">
-              <%= cl_image_tag(current_user.photo.key, height: 60, width: 60, class: 'sb-dropdown-user-img') %>
                   <div class="sb-dropdown-user-details">
-                      <div class="sb-dropdown-user-details-name"><%= current_user.full_name %></div>
+                      <div class="sb-dropdown-user-details-name"><%= current_member.full_name %></div>
                       <div class="sb-dropdown-user-details-email"><%=  %></div>
                   </div>
               </h6>
@@ -70,11 +74,35 @@
               <a class="dropdown-item" href="javascript:void(0);"
                   ><div class="sb-dropdown-item-icon"><i data-feather="settings"></i></div>
                   Account</a
-              ><a class="dropdown-item" href="javascript:void(0);"
-                  ><div class="sb-dropdown-item-icon"><i data-feather="log-out"></i></div>
-                  Logout</a
               >
+                  <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %><div class="sb-dropdown-item-icon"><i data-feather="log-out"></i></div>
+                  Logout <% end %>
           </div>
       </li>
+
   </ul>
+    </div>
+  <% else %>
+  <div class="dropdown dropleft" style='position: fixed; right: 1.8rem; top: 0.8rem;'>
+    <button class="btn sb-btn-transparent-dark " id="dropdownFadeIn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log In</button>
+    <div class="dropdown-menu animated--fade-in border" aria-labelledby="dropdownFadeIn" style='min-width: 8rem;'>
+      <%= link_to new_student_session_path, class: "dropdown-item d-flex justify-content-between" do %>
+        <div class="sb-dropdown-icon-item ">
+          <i class="fas fa-user-graduate"></i>
+        </div>Student
+        <% end %>
+        <%= link_to new_user_session_path, class: "dropdown-item d-flex justify-content-between" do %>
+        <div class="sb-dropdown-icon-item">
+        <i class="fas fa-chalkboard-teacher"></i>
+        </div>Teacher
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to new_user_session_path, class: "dropdown-item d-flex justify-content-between" do %>
+        Sign Up
+        <% end %>
+    </div>
+</div>
+
+  <% end %>
 </nav>
+

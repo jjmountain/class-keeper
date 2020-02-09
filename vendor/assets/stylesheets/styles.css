@@ -2867,7 +2867,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #373c45;
+  /* color: #373c45; */
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -14806,7 +14806,7 @@ body {
   position: relative;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-sidenav-collapse-arrow {
   display: inline-block;
@@ -15962,11 +15962,11 @@ body {
           justify-content: space-between;
 }
 .sb-card-collapsable .card-header[data-toggle=collapse] .sb-card-collapsable-arrow {
-  height: 0.9rem;
-  width: 0.9rem;
+  height: 0.7rem;
+  width: 0.7rem;
   display: -webkit-inline-box;
   display: inline-flex;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
   transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
@@ -15975,8 +15975,8 @@ body {
 .sb-card-collapsable .card-header[data-toggle=collapse] .sb-card-collapsable-arrow svg,
 .sb-card-collapsable .card-header[data-toggle=collapse] .sb-card-collapsable-arrow i,
 .sb-card-collapsable .card-header[data-toggle=collapse] .sb-card-collapsable-arrow .feather {
-  height: 0.9rem;
-  width: 0.9rem;
+  height: 0.7rem;
+  width: 0.7rem;
 }
 .sb-card-collapsable .card-header[data-toggle=collapse].collapsed {
   border-radius: 0.35rem;
@@ -16121,13 +16121,13 @@ body {
 }
 
 .navbar {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .navbar .dropdown-menu {
   top: calc(100% + 0.5rem + 0.5rem) !important;
 }
 .navbar .form-control {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 .sb-topnav .navbar-brand {
@@ -16141,7 +16141,7 @@ body {
 
 .sb-nav-sticky {
   top: 5.125rem;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .sb-nav-sticky .nav-link {
   padding-top: 0.25rem;
@@ -16159,7 +16159,7 @@ body {
 }
 
 .sb-sidenav {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
   font-size: 0.7rem;
@@ -16257,7 +16257,7 @@ body {
 .sb-dropdown-user .dropdown-menu .dropdown-header .sb-dropdown-user-details .sb-dropdown-user-details-name {
   color: #22272e;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   max-width: 10rem;
   white-space: nowrap;
   overflow: hidden;
@@ -16360,7 +16360,7 @@ body {
   font-size: 0.7rem;
 }
 .sb-dropdown-notifications .dropdown-menu .sb-dropdown-notifications-item .sb-dropdown-notifications-item-content .sb-dropdown-notifications-item-content-text {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   max-width: calc(100vw - 8.5rem);
   white-space: nowrap;
   overflow: hidden;

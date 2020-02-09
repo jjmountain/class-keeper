@@ -13,7 +13,7 @@
   </div>
   <div class="container-fluid mt-n10">
     <ul id="course-tabs" class="nav nav-tabs" id="myTab" role="tablist">
-      <% current_user.schools.each_with_index do | school, index |  %>
+      <% current_member.schools.each_with_index do | school, index |  %>
         <li class="nav-item">
           <a class="nav-link <%= index == 0 ? 'active' : '' %>" id="<%= school.id %>-tab" data-toggle="tab" href="#tab<%= school.id %>" role="tab" aria-controls="<%= school.id %>" aria-selected="true"><%= school.name %></a>
         </li>
@@ -21,10 +21,10 @@
     </ul>
 
     <div class="tab-content" id="myTabContent">
-      <% current_user.schools.each_with_index do | school, index | %>
+      <% current_member.schools.each_with_index do | school, index | %>
         <div class="tab-pane show <%= index == 0 ? 'active' : '' %>" id="tab<%= school.id %>" role="tabpanel" aria-labelledby="<%= school.id %>-tab">
           <div class="row">
-            <% current_user.courses.each do | course | %>
+            <% current_member.courses.each do | course | %>
               <% if course.school == school %>
                 <%= render partial: "course_card", locals: { course: course } %>
               <% end %>
