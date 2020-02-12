@@ -18,7 +18,6 @@ class Student < ApplicationRecord
 
   def full_name_kanji
     "#{family_name_kanji} #{given_name_kanji}"
-
   end
 
   def schools

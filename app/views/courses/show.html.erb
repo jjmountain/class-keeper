@@ -10,46 +10,44 @@
   <% end %>
 
   <div class="container-fluid mt-n10">
-      <div class="card">
-          <div class="card-header">
-            Students
-          </div>
+      <div class="card sb-card-collapsable">
+          <a class="card-header" href="#enrolledStudents" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="enrolledStudents">
+            <%= @course.enrollments.count %> Students
+            <div class="sb-card-collapsable-arrow">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </a>
+          <% show_students_or_not = @course.enrollments.empty? ? 'show' : '' %>
+          <div class="collapse <%= show_students_or_not %>" id="enrolledStudents">
             <div class="card-body">
-          <% if @course.enrollments.empty? %>
-            <p>You have no students enrolled in this course 😔</p>
-            <%= link_to course_enrollments_path(@course), class: 'btn btn-primary shadow-sm' do %>Enroll Some Students
-          <% end %>
+              <% if @course.enrollments.empty? %>
+                <p>You have no students enrolled in this course 😔</p>
+                <%= link_to course_enrollments_path(@course), class: 'btn btn-primary shadow-sm' do %>Enroll Some Students
+              <% end %>
 
-          <% else %>
+              <% else %>
 
-        <table id='dttb' class='table table-hover'>
-          <thead>
-            <tr>
-              <th>Student number</th>
-　　　　　　　　　<th>Name in Japanese</th>
-              <th>First name</th>
-              <th>Last name</th>
-              <th>Gender</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @enrollments.each do | enrollment | %>
-            <tr>
-              <td><%= enrollment.student.student_number %></td>
-              <td><%= enrollment.student.full_name_kanji %></td>
-              <td><%= enrollment.student.given_name %></td>
-              <td><%= enrollment.student.family_name %></td>
-              <td><%= enrollment.student.gender %></td>
-              <td><%= enrollment.student.email %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+              <%= render partial: 'courses/students_table', locals: { enrollments: @enrollments } %>
 
-          <% end %>
+            <% end %>
           
-          </div>
+            </div>
+        </div>
       </div>
-  </div>
+      <div class="card sb-card-collapsable mt-4">
+      <a class="card-header" href="#lessonsCard" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="lessonsCard">
+        Lessons
+        <div class="sb-card-collapsable-arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </a>
+      <div class="collapse show" id="lessonsCard">
+        <div class="card-body">
+        <%= form_with(url: "/", method: "get") do %>
+
+        <% end %>
+          
+        </div>
+      </div>
+      </div>
 </main>

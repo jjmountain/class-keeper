@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # get 'courses/index'
   # get 'courses/:id', to: 'courses#show', as: :course
   resources :courses do
+    get 'lessons/preview', to: 'lessons#preview'
     resources :lessons, only: [ :index, :show, :new, :create, :edit, :update ]    
     resources :enrollments, only: [ :index ] do 
       collection { post :import }
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   get 'pages/login', to: 'pages#login'
   get 'pages/signup', to: 'pages#signup'
   get 'pages/dashboard', to: 'pages#dashboard'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

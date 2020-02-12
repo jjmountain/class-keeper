@@ -33,10 +33,10 @@ $(function () {
 $(document).ready(function() {
   $("#dttb").dataTable(
     {
-      "lengthMenu": [[25, -1], [25, "All"]],
-      "scrollY": 200,
-      "paging":   false,
-      "info": false
+      "lengthMenu": [[10, 25, -1], [10, 25, "All"]],
+      "info": false,
+      scrollCollapse: true,
+      
     }
   );
 });

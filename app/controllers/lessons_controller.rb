@@ -1,4 +1,8 @@
 class LessonsController < ApplicationController
+
+  def preview
+  end
+  
   def index
   end
 
