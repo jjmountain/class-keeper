@@ -44,8 +44,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    ajax-datatables-rails (1.1.0)
-      railties (>= 4.2)
     arel (9.0.0)
     autoprefixer-rails (9.7.2)
       execjs
@@ -161,7 +159,7 @@ GEM
     public_suffix (4.0.1)
     puma (4.3.0)
       nio4r (~> 2.0)
-    rack (2.0.7)
+    rack (2.2.2)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -274,7 +272,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-datatables-rails
   autoprefixer-rails
   bootsnap
   capybara
