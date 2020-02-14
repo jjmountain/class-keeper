@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_120847) do
 
   create_table "lessons", force: :cascade do |t|
     t.text "objective"
-    t.datetime "start_time", default: "2020-01-21 03:56:06"
+    t.datetime "start_time", default: "2020-02-14 03:06:08"
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
