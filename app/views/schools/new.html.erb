@@ -1,0 +1,36 @@
+<main>
+  <%= render partial: 'shared/page_header', locals: { title: 'Add a School', feather_icon: 'home' } %>
+
+  
+  <%= form_with(model: @school, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div data-controller='nested-form'>
+      <template data-target='nested-form.template'> 
+        <%= form.fields_for :faculties, Faculty.new, child_index: 'TEMPLATE_RECORD' do |faculty| %>
+          <%= render 'faculty_fields', form: faculty  %>
+        <% end %>
+      </template>
+
+       <%= form.fields_for :faculties do |faculty| %>
+          <%= render 'faculty_fields', form: faculty  %>
+        <% end %>
+
+        <div data-target="nested-form.add_faculty">
+          <%= link_to "Add Faculty", "#", data: { action: "click->nested-form#add_association" } %>
+        </div>
+      
+    </div>
+
+    <h1>Faculties</h1>
+   
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+
+  <% end %>
+</main>
