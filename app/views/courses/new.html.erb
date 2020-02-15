@@ -2,7 +2,7 @@
  <div class="row my-4">
     <div class="col-md-6 offset-md-3">
   <h1>New Course</h1>
-    <%= render 'course_form' %>
+    <%= render partial: 'course_form', locals: { course: @course } %>
     </div>
   </div>
 </div>

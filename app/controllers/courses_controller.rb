@@ -75,6 +75,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:school, :faculty, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course)
+    params.require(:course).permit(:school, :faculty, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculties_attributes: [:_destroy, :id, :name, :max_absences], schools_attributes: [:_destroy, :id, :name] )
   end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'schools/new'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'lessons/index'
   get 'lessons/show'
@@ -15,8 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :schools, only: [] do
-    resources :faculties, only: :index
+  resources :schools, only: [ :new, :create, :edit, :update] do
+    resources :faculties, only: [ :index, :new, :edit, :create, :update ]
   end
 
   resources :semesters, only: [ :new, :create, :edit, :update]
