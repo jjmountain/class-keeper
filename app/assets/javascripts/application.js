@@ -1,8 +1,7 @@
 //= require jquery
 //= require rails-ujs
-//= require_tree .
 //= require datatables
-
+//= require_tree .
 
 $(function () {
   $(document).on('change', '.remote-select', function (e) {

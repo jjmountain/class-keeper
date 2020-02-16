@@ -242,6 +242,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    selectize-rails (0.12.6)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -309,6 +310,7 @@ DEPENDENCIES
   redis
   rspec-rails (~> 3.0)
   sassc-rails
+  selectize-rails
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)

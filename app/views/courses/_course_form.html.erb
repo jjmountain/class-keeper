@@ -1,44 +1,67 @@
 <%= simple_form_for(course) do |f| %>
+  
+
+  <div class='mb-4' data-controller='nested-form'>
     <%= f.input :school, 
       collection: School.select_value,
       selected:  course&.school&.id,
       include_blank: true,
-      input_html: { class: 'remote-select', data: { target: '#course_faculty' } }      
+      input_html: { class: 'remote-select', data: { target: '#course_faculty' } },
+      wrapper_html: { id: 'original-course-input', data: { target: 'nested-form.school_input' } }      
     %>
-    <template>
-      <%= f.simple_fields_for :school, School.new do |school| %>
-        <%= school.input :name, label: 'School not listed? Add one' %>
+
+    <div data-target="nested-form.add_school">
+      <%= link_to "School not listed? Click here to add it", "#", data: { action: "click->nested-form#add_association" } %>
+    </div>
+
+    <template data-target='nested-form.school_template'>
+      <%= f.simple_fields_for :school, School.new, child_index: 'SCHOOL_TEMPLATE_RECORD' do |school| %>
+        <div class="nested-fields">
+          <div class="form-group">
+            <%= school.input :name, label: 'School', placeholder: 'Add your school', class: 'form-control' %>
+          </div>
+        </div>
       <% end %>
     </template>
 
+
     <%= f.input :faculty,
       collection: Faculty.select_values(course&.school),
-      selected: course&.faculty&.id
+      selected: course&.faculty&.id,
+      wrapper_html: { class: 'mt-3', id: 'origin-faculty-input', data: { target: 'nested-form.faculty_input' } }      
     %>
+
+    <div data-target="nested-form.add_faculty">
+    </div>
     
-    <template>
-      <%= f.simple_fields_for :faculty, Faculty.new do |faculty| %>
-        <%= faculty.input :name, label: 'Faculty name' %>
+    <template data-target='nested-form.faculty_template'>
+      <%= f.simple_fields_for :faculty, Faculty.new, child_index: 'FACULTY_TEMPLATE_RECORD' do |faculty| %>
+      <div class="nested-fields mt-3">
+        <div class="form-group">
+          <%= faculty.input :name, label: 'Faculty', placeholder: 'Add your faculty' %>
+        </div>
+      </div>
       <% end %> 
     </template>
 
-    <%= f.input :name, label: 'Course Name' %>
-    <%= f.input :class_number, label: 'Class Number' %>
-    <%= f.input :class_type, collection: ['Speaking', 'Writing'], include_blank: false, label: 'Class Focus' %>
-
-
-    <%= f.input :description %>
-    <div class="d-flex justify-content-between">
-      <%= f.input :start_date, label: 'First Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
-      <%= f.input :end_date, label: 'Final Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
-    </div>
-    <div class="d-flex justify-content-between">
-      <%= f.input :lessons_per_week, label: 'Lessons per week', input_html: { class: 'w-10' } %>
-      <%= f.input :weeks_per_course, label: 'Weeks in course', input_html: { class: 'w-10' } %>
 
     </div>
+  
+  <%= f.input :name, label: 'Course Name' %>
+  <%= f.input :class_number, label: 'Class Number' %>
+  <%= f.input :class_type, collection: ['Speaking', 'Writing'], include_blank: true, label: 'Class Focus' %>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Register", class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  <div class="d-flex justify-content-between">
+    <%= f.input :start_date, label: 'First Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
+    <%= f.input :end_date, label: 'Final Lesson Date', as: :string, input_html: { class: 'datepicker' } %>
+  </div>
+  <div class="d-flex justify-content-between">
+    <%= f.input :lessons_per_week, label: 'Lessons per week', input_html: { class: 'w-10' } %>
+    <%= f.input :weeks_per_course, label: 'Weeks in course', input_html: { class: 'w-10' } %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Register", class: 'btn btn-primary' %>
+  </div>
+<% end %>

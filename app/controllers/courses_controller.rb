@@ -14,20 +14,11 @@ class CoursesController < ApplicationController
   end
 
   def create
-    course_params
-    @course = Course.new(
-      name: course_params[:name], 
-      description: course_params[:description], 
-      start_date: course_params[:start_date], 
-      end_date: course_params[:end_date], 
-      class_type: course_params[:class_type],
-      class_number: course_params[:class_number],
-      lessons_per_week: course_params[:lessons_per_week],
-      weeks_per_course: course_params[:weeks_per_course]
-    )
+    @course = Course.new(course_params)
     @course.user = current_user
-    @course.school_id = course_params[:school].to_i
-    @course.faculty_id = course_params[:faculty].to_i
+
+    # @course.school_id = course_params[:school].to_i
+    # @course.faculty_id = course_params[:faculty].to_i
     if @course.save
       redirect_to course_path(@course)
     else
@@ -75,6 +66,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:school, :faculty, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculties_attributes: [:_destroy, :id, :name, :max_absences], schools_attributes: [:_destroy, :id, :name] )
+    params.require(:course).permit(:school, :faculty, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences], school_attributes: [:id, :name] )
   end
 end

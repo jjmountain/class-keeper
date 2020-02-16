@@ -18,6 +18,7 @@ gem 'redis'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'sassc-rails'
+gem 'selectize-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
@@ -37,3 +38,5 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'dotenv-rails'
 end
+
+
