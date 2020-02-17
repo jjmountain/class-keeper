@@ -2,7 +2,7 @@
   
 
   <div class='mb-4' data-controller='nested-form'>
-    <%= f.input :school, 
+    <%= f.association :school, 
       collection: School.select_value,
       selected:  course&.school&.id,
       include_blank: true,
@@ -11,7 +11,7 @@
     %>
 
     <div data-target="nested-form.add_school">
-      <%= link_to "School not listed? Click here to add it", "#", data: { action: "click->nested-form#add_association" } %>
+      <%= link_to "School not listed? Click here to add it", "#", data: { action: "click->nested-form#add_school_association" } %>
     </div>
 
     <template data-target='nested-form.school_template'>
@@ -25,13 +25,16 @@
     </template>
 
 
-    <%= f.input :faculty,
+    <%= f.association :faculty,
       collection: Faculty.select_values(course&.school),
       selected: course&.faculty&.id,
+      input_html: { id: 'course_faculty' },
       wrapper_html: { class: 'mt-3', id: 'origin-faculty-input', data: { target: 'nested-form.faculty_input' } }      
     %>
 
+
     <div data-target="nested-form.add_faculty">
+      <%= link_to "Faculty not listed? Click here to add it", "#", data: { action: "click->nested-form#add_faculty_association" } %>
     </div>
     
     <template data-target='nested-form.faculty_template'>

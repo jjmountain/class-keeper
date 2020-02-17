@@ -21,7 +21,6 @@ $(function () {
             console.log('Item:', item, 'value:', value)
             target_select.append(value)
           })
-          // target_select.trigger('chosen:updated')
         },
         error: function () {}
       })

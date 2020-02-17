@@ -17,11 +17,20 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     @course.user = current_user 
 
+    # if using selects then they will be created through nested attributes - no need to be concerned except update faculty school_id manually
+
     # if user entered the school and faculty, grab it from params and add it manually to course
-    if params[:course][:school] && params[:course][:faculty]
-      @course.school_id = params[:course][:school]
-      @course.faculty_id = params[:course][:faculty]
-    end
+    # if params[:course][:school] && params[:course][:faculty]
+    #   raise
+    #   @course.school_id = params[:course][:school]
+    #   @course.faculty_id = params[:course][:faculty]
+
+    # # if user only entered faculty, grab it from params and add it manually to course
+    # elsif params[:course][:faculty]
+    #   @course.faculty_id = params[:course][:faculty]
+    #   raise
+    # end
+
     if @course.save
       # set the faculty school id because form doesn't update it
       @course.faculty.school_id = @course.school_id
@@ -72,6 +81,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name] )
+    params.require(:course).permit(:school_id, :faculty_id, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name] )
   end
 end

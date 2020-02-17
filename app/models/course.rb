@@ -7,6 +7,7 @@ class Course < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   accepts_nested_attributes_for :school
   accepts_nested_attributes_for :faculty
+
   
   validates :name, presence: true
   validates_associated :school

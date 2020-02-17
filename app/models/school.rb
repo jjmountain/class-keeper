@@ -3,7 +3,7 @@ class School < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :faculties, dependent: :destroy
   has_many :courses
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   accepts_nested_attributes_for :courses
 
   def self.select_value
