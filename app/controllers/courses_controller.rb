@@ -15,11 +15,17 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    @course.user = current_user
+    @course.user = current_user 
 
-    # @course.school_id = course_params[:school].to_i
-    # @course.faculty_id = course_params[:faculty].to_i
+    # if user entered the school and faculty, grab it from params and add it manually to course
+    if params[:course][:school] && params[:course][:faculty]
+      @course.school_id = params[:course][:school]
+      @course.faculty_id = params[:course][:faculty]
+    end
     if @course.save
+      # set the faculty school id because form doesn't update it
+      @course.faculty.school_id = @course.school_id
+      @course.faculty.save
       redirect_to course_path(@course)
     else
       render 'new'
@@ -66,6 +72,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:school, :faculty, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences], school_attributes: [:id, :name] )
+    params.require(:course).permit(:name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name] )
   end
 end

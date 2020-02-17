@@ -1,9 +1,8 @@
 class School < ApplicationRecord
   has_many :periods, dependent: :destroy
+  has_many :courses, dependent: :destroy
+  has_many :faculties, dependent: :destroy
   has_many :courses
-  has_many :faculties
-  has_many :courses, through: :faculties
-  has_many :semesters
   validates :name, uniqueness: true
   accepts_nested_attributes_for :courses
 
