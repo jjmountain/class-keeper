@@ -5,10 +5,10 @@
                     <% if local_variables.include?(:feather_icon)%><div class="sb-page-header-icon"><i data-feather=<%= feather_icon %>></i></div><% end %>
                     <%= title %>
               </h1>
-                    <%= yield %>
               <% if local_variables.include?(:subtitle) %>
                 <div class="sb-page-header-subtitle"><%= subtitle %></div>
               <% end %>
+                    <%= yield %>
           </div>
       </div>
   </div>

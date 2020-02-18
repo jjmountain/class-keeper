@@ -43,9 +43,7 @@
       </a>
       <div class="collapse show" id="lessonsCard">
         <div class="card-body">
-        <%= form_with(url: "/", method: "get") do %>
-
-        <% end %>
+        <%= link_to "Add some lessons", new_course_lesson_path(@course), class: 'btn btn-outline-primary' %>
           
         </div>
       </div>

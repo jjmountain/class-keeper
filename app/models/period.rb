@@ -3,6 +3,6 @@ class Period < ApplicationRecord
   has_many :course_periods, dependent: :destroy
 
   def class_time
-    "#{self.start_time.strftime('%H:%M')} - #{self.end_time.strftime('%H:%M')}".strip()
+    "#{period_number}: #{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M')}".strip()
   end
 end

@@ -10,13 +10,14 @@ export default class extends Controller {
     this.add_schoolTarget.style.display = 'none';
     this.school_inputTarget.remove()
     this.add_faculty_association()
+    this.add_facultyTarget.remove()
   }
   
   add_faculty_association(event) {
     var content = this.faculty_templateTarget.innerHTML.replace(/FACULTY_TEMPLATE_RECORD/g, Math.floor(Math.random() * 20000))
     this.add_facultyTarget.insertAdjacentHTML('beforebegin', content)
     this.faculty_inputTarget.remove()
-  
+    this.add_facultyTarget.remove()
   }
 
   remove_association(event) {

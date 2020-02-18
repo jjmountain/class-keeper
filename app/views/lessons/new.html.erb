@@ -1,2 +1,42 @@
-<h1>Lessons#new</h1>
-<p>Find me in app/views/lessons/new.html.erb</p>
+<main>
+  <%= render layout: 'shared/page_header', locals: { title: @course.name, subtitle: 'Lesson Setup', feather_icon: 'message-square' } do %>
+  <%= link_to edit_course_path(@course), class: 'btn sb-btn-transparent-light sb-btn-icon edit-button' do %> <i data-feather="edit"></i><% end %>
+    <ol class="breadcrumb mt-4 mb-0">
+        <li class="breadcrumb-item"><%= @course.school.name %></li>
+        <li class="breadcrumb-item"><%= @course.faculty.name %></li>
+        <li class="breadcrumb-item active"><%= @course.name %></li>
+    </ol>
+  <% end %>
+  <div class="container-fluid mt-n10">
+  
+  <div class="card">
+  <div class="card-header">Class Details</div>
+    <div class="card-body">
+      <%= simple_form_for(@course_period, url: periods_create_path) do | course_form | %>
+       <%= course_form.association :period, collection: Period.where(school_id: @school.id), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
+       <%= course_form.input :day %>
+       <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-info mb-4' %>
+      <% end %>
+
+    <%= simple_form_for([@school, @period], remote: true) do |f| %>
+      <div class="form-row">
+        <div class="col">
+        <%= f.input :period_number %>
+        </div>
+        <div class="col">
+          <%= f.input :start_time %>
+        </div>
+        <div class="col">
+          <%= f.input :end_time %>
+        </div>
+        <%= f.hidden_field :course, value: params[:course_id] %>
+      </div>
+        <%= f.button :submit, 'Add period', class: 'btn btn-outline-primary' %>
+      <% end %>
+      <div id="periods">
+      </div>
+    </div>
+  </div>
+       
+  </div>
+</main>
