@@ -1,6 +1,6 @@
 
 var sel = document.querySelector('#course_period_period_id');
 var opt = document.createElement('option');
-opt.appendChild(document.createTextNode('<%= "Period #{@course_period.period.period_number}: #{@course_period.period.class_time}" %>'));
-opt.value = "<%= @course_period.id %>";
+opt.appendChild(document.createTextNode('<%= @period.class_time %>'));
+opt.value = "<%= @period.id %>";
 sel.appendChild(opt);

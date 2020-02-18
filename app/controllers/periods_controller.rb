@@ -6,7 +6,7 @@ class PeriodsController < ApplicationController
     @period = Period.new(period_params)
     @period.faculty = @course.faculty
     if @period.save
-      binding.pry
+      # @course_period = CoursePeriod.create(course_id: @course.id, period_id: @period.id)
       respond_to do |format|
           format.js
         end

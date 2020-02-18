@@ -19,18 +19,14 @@
             <% school.courses.where(user_id: current_user.id).each do |course| %>
               <%= link_to course_path(course), class: 'nav-link' do %>
               <% icon_type = course.class_type == 'Speaking' ? 'message-circle' : 'edit-2' %>
-              <% course_period_string = '' %>
-              <% if course.course_periods %>
-                  <% course.course_periods.each do |course_period| %>
-                  <% course_period_string += course_period.day %> 
-                  <% course_period_string += ' ' + course_period.period.period_number.to_s + ' ' %> 
-                  <% end %>
                     <div class="sb-nav-link-icon"><i data-feather=<%= icon_type %>></i></div><%= course.name %>                  
-                    <% unless course_period_string.empty? %>
-                      <span class="badge badge-light d-flex align-items-center ml-2">
-                      <%= course_period_string %></span>
+                    <% unless course.course_periods.empty? %>
+                       <% course.course_periods.first(2).each do |course_period| %>
+                        <% course_period_string = "#{course_period.day} #{course_period.period.period_number.to_s}" %>
+                         <span class="badge badge-light d-flex align-items-center ml-2" style='border: #e1e1e0 solid 1px; color: grey; font-weight: 100; background: transparent;'>
+                        <%= course_period_string %></span>
+                       <% end %>
                     <% end %>
-              <% end %>
               <% end %>
             <% end %>
           </nav>

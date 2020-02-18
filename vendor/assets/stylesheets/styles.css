@@ -16185,7 +16185,7 @@ body {
   height: 1rem;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link.active {
-  font-weight: 700;
+  font-weight: 300;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link.active .nav-icon {
   color: #0061f2;
