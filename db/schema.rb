@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_15_031905) do
+ActiveRecord::Schema.define(version: 2020_02_18_063123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,11 +123,11 @@ ActiveRecord::Schema.define(version: 2020_02_15_031905) do
   create_table "periods", force: :cascade do |t|
     t.integer "period_number"
     t.time "start_time"
-    t.time "end_time"
-    t.bigint "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_periods_on_school_id"
+    t.bigint "faculty_id"
+    t.integer "minutes"
+    t.index ["faculty_id"], name: "index_periods_on_faculty_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -199,6 +199,6 @@ ActiveRecord::Schema.define(version: 2020_02_15_031905) do
   add_foreign_key "grade_sections", "enrollments"
   add_foreign_key "lesson_sections", "lessons"
   add_foreign_key "lessons", "courses", column: "courses_id"
-  add_foreign_key "periods", "schools"
+  add_foreign_key "periods", "faculties"
   add_foreign_key "tasks", "attendances"
 end

@@ -1,5 +1,6 @@
 <main>
   <%= render layout: 'shared/page_header', locals: { title: @course.name, subtitle: 'Lesson Setup', feather_icon: 'message-square' } do %>
+
   <%= link_to edit_course_path(@course), class: 'btn sb-btn-transparent-light sb-btn-icon edit-button' do %> <i data-feather="edit"></i><% end %>
     <ol class="breadcrumb mt-4 mb-0">
         <li class="breadcrumb-item"><%= @course.school.name %></li>
@@ -9,12 +10,24 @@
   <% end %>
   <div class="container-fluid mt-n10">
   
-  <div class="card">
-  <div class="card-header">Class Details</div>
-    <div class="card-body">
-      <%= simple_form_for(@course_period, url: periods_create_path) do | course_form | %>
-       <%= course_form.association :period, collection: Period.where(school_id: @school.id), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
-       <%= course_form.input :day %>
+  <div class="card w-50">
+  <div class="card-header">Days and Periods 
+    <% @course.course_periods.map { |p| "<span class='badge badge-success'>#{p.day} #{p.period.period_number}</span>" }.join(' ') %>
+  </div>
+    <div class="card-body" id="day-period">
+    <% @course_periods.each do |cp| %>
+      <%= render partial: 'course_periods/period_badge', locals: { course_period: cp} %>
+    <% end %>
+      <%= simple_form_for(@course_period, remote: true) do | course_form | %>
+      <div class="form-row">
+        <div class="col">
+          <%= course_form.input :day, as: :select, collection: CoursePeriod.days.keys.map { |k| [k, CoursePeriod.days[k]] }%>
+        </div>
+        <div class="col">
+          <%= course_form.association :period, collection: Period.where(faculty_id: @course.faculty.id), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
+        </div>
+      </div>
+       <%= course_form.hidden_field :course_id, value: params[:course_id] %>
        <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-info mb-4' %>
       <% end %>
 
@@ -27,7 +40,7 @@
           <%= f.input :start_time %>
         </div>
         <div class="col">
-          <%= f.input :end_time %>
+          <%= f.input :minutes, input_html: { value: f.object.minutes || 100 } %>
         </div>
         <%= f.hidden_field :course, value: params[:course_id] %>
       </div>

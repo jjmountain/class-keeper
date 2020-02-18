@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
     @course_period = CoursePeriod.new
+    @course_periods = CoursePeriod.where(course_id: @course.id)
     @school = @course.school
     @lesson = Lesson.new
     @period = Period.new

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'course_periods/create'
   get 'periods/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'lessons/index'
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
       collection { post :import }
     end
   end
+
+  resources :course_periods, only: [ :create, :update]
 
   
   resources :schools, only: [ :new, :create, :edit, :update] do

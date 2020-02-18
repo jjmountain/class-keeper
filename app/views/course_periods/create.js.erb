@@ -1,0 +1,6 @@
+
+var cardHeader = document.querySelector('#day-period');
+console.log(cardHeader);
+var htmlBadge = '<%= escape_javascript(render partial: 'course_periods/period_badge', locals: { course_period: @course_period}) %>';
+console.log(htmlBadge);
+cardHeader.insertAdjacentHTML('afterbegin', htmlBadge);

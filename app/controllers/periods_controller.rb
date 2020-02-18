@@ -1,11 +1,11 @@
 require 'pry'
 class PeriodsController < ApplicationController
   def create
+    @course = Course.find(params[:period][:course])
     @school = School.find(params[:school_id])
     @period = Period.new(period_params)
-    @period.school = @school
+    @period.faculty = @course.faculty
     if @period.save
-      @course_period = CoursePeriod.create(course_id: params[:period][:course], period_id: @period.id)
       binding.pry
       respond_to do |format|
           format.js
@@ -16,6 +16,6 @@ class PeriodsController < ApplicationController
   private
 
   def period_params
-    params.require(:period).permit(:period_number, :start_time, :end_time)
+    params.require(:period).permit(:period_number, :start_time, :minutes)
   end
 end

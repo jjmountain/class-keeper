@@ -1,8 +1,6 @@
 
-const sel = document.querySelector('#course_course_period_ids');
-const opt = document.createElement('option');
-opt.appendChild(document.createTextNode(<%= "P#{@course_period.period.period_number}: #{@course_period.period.start_time} - #{@course_period.period.end_time}" %>));
+var sel = document.querySelector('#course_period_period_id');
+var opt = document.createElement('option');
+opt.appendChild(document.createTextNode('<%= "Period #{@course_period.period.period_number}: #{@course_period.period.class_time}" %>'));
 opt.value = "<%= @course_period.id %>";
 sel.appendChild(opt);
-
-console.log("executed this js");
