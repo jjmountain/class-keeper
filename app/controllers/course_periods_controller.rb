@@ -6,10 +6,17 @@ class CoursePeriodsController < ApplicationController
       period_id: course_period_params[:period_id]
     )
     if @course_period.save!
-      # binding.pry
       respond_to do |format|
         format.js
       end
+    end
+  end
+
+  def destroy
+    @course_period = CoursePeriod.find(params[:id])
+    @course_period.destroy
+    respond_to do |format|
+      format.js
     end
   end
 

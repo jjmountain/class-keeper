@@ -11,13 +11,15 @@
   <div class="container-fluid mt-n10">
   
   <div class="card w-50">
-  <div class="card-header">Days and Periods 
+  <div class="card-header">Lesson Time
     <% @course.course_periods.map { |p| "<span class='badge badge-success'>#{p.day} #{p.period.period_number}</span>" }.join(' ') %>
   </div>
-    <div class="card-body" id="day-period">
-    <% @course_periods.each do |cp| %>
-      <%= render partial: 'course_periods/period_badge', locals: { course_period: cp} %>
-    <% end %>
+    <div class="card-body">
+    <div class="row" id='day-period'>
+      <% @course_periods.each do |cp| %>
+        <%= render partial: 'course_periods/period_badge', locals: { course_period: cp} %>
+      <% end %>
+    </div>
       <%= simple_form_for(@course_period, remote: true) do | course_form | %>
       <div class="form-row">
         <div class="col">
@@ -27,8 +29,8 @@
           <%= course_form.association :period, collection: Period.where(faculty_id: @course.faculty.id), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
         </div>
       </div>
+       <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-primary mb-4' %>
        <%= course_form.hidden_field :course_id, value: params[:course_id] %>
-       <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-info mb-4' %>
       <% end %>
 
     <%= simple_form_for([@school, @period], remote: true) do |f| %>
