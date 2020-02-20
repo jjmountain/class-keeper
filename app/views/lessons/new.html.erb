@@ -26,30 +26,18 @@
           <%= course_form.input :day, as: :select, collection: CoursePeriod.days.keys.map { |k| [k, CoursePeriod.days[k]] }%>
         </div>
         <div class="col">
-          <%= course_form.association :period, collection: Period.where(faculty_id: @course.faculty.id), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
+          <%= course_form.association :period, collection: Period.where(faculty_id: @course.faculty.id).order(:period_number), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
         </div>
       </div>
        <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-primary mb-4' %>
        <%= course_form.hidden_field :course_id, value: params[:course_id] %>
       <% end %>
 
-    <%= simple_form_for([@school, @period], remote: true) do |f| %>
-      <div class="form-row">
-        <div class="col">
-        <%= f.input :period_number %>
-        </div>
-        <div class="col">
-          <%= f.input :start_time %>
-        </div>
-        <div class="col">
-          <%= f.input :minutes, input_html: { value: f.object.minutes || 100 } %>
-        </div>
-        <%= f.hidden_field :course, value: params[:course_id] %>
+      <div data-controller='periods'>
+        <%= render partial: 'periods/period', collection: Period.where(faculty_id: @course.faculty_id) %>
       </div>
-        <%= f.button :submit, 'Add period', class: 'btn btn-outline-primary' %>
-      <% end %>
-      <div id="periods">
-      </div>
+
+      <%= render 'periods/form', school: @school, period: @period %>
     </div>
   </div>
        
