@@ -21,7 +21,7 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'tod'
+gem 'wicked'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

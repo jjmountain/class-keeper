@@ -1,20 +1,6 @@
 
-function refreshPeriodForm(innerHTML) {
-  var periodForm = document.querySelector("#new_period");
-  periodForm.innerHTML = innerHTML;
-}
-
-function addCoursePeriod(optionText, optionValue) {
-  var sel = document.querySelector('#course_period_period_id');
-  var opt = document.createElement('option');
-  opt.appendChild(document.createTextNode(optionText));
-  opt.value = optionValue;
-  sel.appendChild(opt);
-}
-
-<% if @period.errors.any? %>
-  refreshPeriodForm('<%= j render "periods/form", period: @period, school: @school %>');
-<% else %>
-  addCoursePeriod('<%= @period.class_time %>', '<%= @period.id %>')
-  refreshPeriodForm('<%= j render "periods/form", period: @period, school: @school %>');
-<% end %>
+var sel = document.querySelector('#course_period_period_id');
+var opt = document.createElement('option');
+opt.appendChild(document.createTextNode('<%= @period.class_time %>'));
+opt.value = "<%= @period.id %>";
+sel.appendChild(opt);
