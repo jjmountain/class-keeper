@@ -12,21 +12,28 @@
   
   <div class="card w-50">
   <div class="card-header">Lesson Time
-    <% @course.course_periods.map { |p| "<span class='badge badge-success'>#{p.day} #{p.period.period_number}</span>" }.join(' ') %>
+    <%= @course.course_periods.map { |course_period| "#{course_period.day} #{course_period.period.class_time}" }.join(' | ') %>
   </div>
     <div class="card-body">
     <div class="row" id='day-period'>
-      <% @course_periods.each do |cp| %>
-        <%= render partial: 'course_periods/period_badge', locals: { course_period: cp} %>
+      <% @course_periods.each do | course_period | %>
+        <%= render partial: 'course_periods/period_badge', locals: { course_period: course_period } %>
       <% end %>
     </div>
-      <%= render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>
+    <div data-controller='course-periods'>
+    <%= link_to "Edit Lesson Times", "#", data: { action: "click->course-periods#show_course_period_form" }, class: 'mb-2' %>
+      <div data-target='course-periods.course_period' style='display: none;'>
+        <%= render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty, course: @course } %>    
+      </div>
+    </div>
 
-      <div data-controller='periods' id='existing-periods'>
+      <div class='row' id='existing-periods'>
+      
         <%= render partial: 'periods/period', collection: Period.where(faculty_id: @course.faculty_id) %>
       </div>
-
-      <%= render 'periods/form', faculty: @faculty, period: @period, course: @course %>
+      <div data-controller='periods'>
+        <%= render 'periods/form', faculty: @faculty, period: @period, course: @course %>
+      </div>
     </div>
   </div>
        

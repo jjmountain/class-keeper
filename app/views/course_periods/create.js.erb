@@ -5,9 +5,9 @@ function addCoursePeriodBadge(innerHTML) {
 }
 
 <% if @course_period.errors.any? %>
-   document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>';
+   document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty, course: @course } %>';
 <% else %>
   addCoursePeriodBadge('<%= j render partial: 'course_periods/period_badge', locals: { course_period: @course_period } %>');
-   document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>';
+  document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: CoursePeriod.new, faculty: @faculty, course: @course } %>';
 <% end %>
 

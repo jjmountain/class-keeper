@@ -6,8 +6,9 @@ class CoursePeriodsController < ApplicationController
       course_id: course_period_params[:course_id],
       period_id: course_period_params[:period_id]
     )
-    @faculty = Course.find(params[:course_period][:course_id]).faculty
-    if @course_period.save!
+    @course = Course.find(params[:course_period][:course_id])
+    @faculty = @course.faculty
+    if @course_period.save
       respond_to do |format|
         format.js
       end

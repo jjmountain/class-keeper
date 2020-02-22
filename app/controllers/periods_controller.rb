@@ -1,20 +1,13 @@
 require 'pry'
 class PeriodsController < ApplicationController
+
   def create
     @course_period = CoursePeriod.new
     @course = Course.find(params[:period][:course])
     @period = Period.new(period_params)
     @faculty = @period.faculty
     @period.faculty = @faculty
-    if @period.save
-      respond_to do |format|
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.js
-      end
-    end
+    @period.save
   end
 
   def destroy

@@ -17,11 +17,17 @@ function addCoursePeriod(optionText, optionValue) {
   sel.appendChild(opt);
 }
 
+function addPeriodBadge(innerHTML) {
+  document.querySelector('#existing-periods').innerHTML = innerHTML;
+  feather.replace();
+}
+
 <% if @period.errors.any? %>
   refreshPeriodForm('<%= j render "periods/form", period: @period, faculty: @faculty, course: @course %>');
 <% else %>
-  addCoursePeriod('<%= @period.class_time %>', '<%= @period.id %>')
-  refreshPeriodForm('<%= j render "periods/form", period: @period, faculty: @faculty, course: @course %>');
-  refreshCoursePeriodForm('<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>');
+  addCoursePeriod('<%= @period.class_time %>', '<%= @period.id %>');
+  addPeriodBadge('<%= j render partial: 'periods/period', collection: Period.where(faculty_id: @course.faculty_id) %>');
+  refreshPeriodForm('<%= j render "periods/form", period: Period.new, faculty: @faculty, course: @course %>');
+  refreshCoursePeriodForm('<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty, course: @course } %>');
 <% end %>
 

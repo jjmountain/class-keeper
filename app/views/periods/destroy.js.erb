@@ -1,6 +1,2 @@
 var courseDiv = document.querySelector('<%= "#period-#{@period.id}" %>');
 courseDiv.remove();
-
-<% if @period.errors.any? %>
-  document.querySelector('#existing-periods').insertAdjacentHTML('beforeend', '<%= @period.errors.full_messages.each { |error| error } %>')
-<% end %>

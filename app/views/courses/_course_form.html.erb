@@ -51,6 +51,7 @@
     </div>
   <div class="form-row">
     <%= f.input :name, label: 'Course Name', wrapper_html: { class: 'col' } %>
+    <%= f.input :classroom, label: 'Classroom', wrapper_html: { class: 'col'} %>
     <%= f.input :class_number, label: 'Class Number', wrapper_html: { class: 'col' } %>
     <%= f.input :class_type, collection: ['Speaking', 'Writing'], include_blank: true, label: 'Class Focus', wrapper_html: { class: 'col' } %>
   </div>
