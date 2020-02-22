@@ -4,6 +4,11 @@ function refreshPeriodForm(innerHTML) {
   periodForm.innerHTML = innerHTML;
 }
 
+function refreshCoursePeriodForm(innerHTML) {
+  var coursePeriodForm = document.querySelector('#new_course_period');
+  coursePeriodForm.innerHTML = innerHTML;
+}
+
 function addCoursePeriod(optionText, optionValue) {
   var sel = document.querySelector('#course_period_period_id');
   var opt = document.createElement('option');
@@ -13,8 +18,10 @@ function addCoursePeriod(optionText, optionValue) {
 }
 
 <% if @period.errors.any? %>
-  refreshPeriodForm('<%= j render "periods/form", period: @period, school: @school %>');
+  refreshPeriodForm('<%= j render "periods/form", period: @period, faculty: @faculty, course: @course %>');
 <% else %>
   addCoursePeriod('<%= @period.class_time %>', '<%= @period.id %>')
-  refreshPeriodForm('<%= j render "periods/form", period: @period, school: @school %>');
+  refreshPeriodForm('<%= j render "periods/form", period: @period, faculty: @faculty, course: @course %>');
+  refreshCoursePeriodForm('<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>');
 <% end %>
+

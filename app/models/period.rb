@@ -6,6 +6,7 @@ class Period < ApplicationRecord
   validates :start_time, presence: true
   validates :period_number, uniqueness: { scope: :faculty_id }, numericality: { only_integer: true, less_than: 13 }
   validate :periods_not_overlapping
+  before_destroy :check_period_not_in_use
 
 
 
@@ -17,16 +18,21 @@ class Period < ApplicationRecord
     start_time + minutes.minutes
   end
 
-  private
+  def check_period_not_in_use
+    # look through course periods where course id is the same as the period 
+    if CoursePeriod.where.not(period_id: id).empty?
+      errors.add(:id, "Period is currently in use in a course")
+    end
+  end
 
   def periods_not_overlapping
     Period.where(faculty_id: faculty_id).each do |existing_period|
       # check that the period start time doesn't overlap with the existing period
       if self.start_time.strftime("%H%M%S") >= existing_period.start_time.strftime("%H%M%S") && self.start_time.strftime("%H%M%S") <= existing_period.end_time.strftime("%H%M%S")
-        errors.add(:start_date, "must not overlap with existing period")
+        errors.add(:start_time, "must not overlap with existing period")
       elsif self.end_time.strftime("%H%M%S") >= existing_period.start_time.strftime("%H%M%S") && self.end_time.strftime("%H%M%S") <= existing_period.end_time.strftime("%H%M%S")
         # check that the period end time doesn't overlap with the existing period
-        errors.add(:start_date, "must not overlap with existing period")
+        errors.add(:start_time, "must not overlap with existing period")
       end
     end
   end

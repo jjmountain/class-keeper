@@ -1,8 +1,13 @@
+function addCoursePeriodBadge(innerHTML) {
+  var cardHeader = document.querySelector('#day-period');
+  cardHeader.insertAdjacentHTML('beforeend', innerHTML);
+  feather.replace();
+}
 
-var cardHeader = document.querySelector('#day-period');
-console.log(cardHeader);
-var htmlBadge = '<%= escape_javascript(render partial: 'course_periods/period_badge', locals: { course_period: @course_period}) %>';
-console.log(htmlBadge);
-cardHeader.insertAdjacentHTML('afterbegin', htmlBadge);
-feather.replace();
+<% if @course_period.errors.any? %>
+   document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>';
+<% else %>
+  addCoursePeriodBadge('<%= j render partial: 'course_periods/period_badge', locals: { course_period: @course_period } %>');
+   document.querySelector('#new_course_period').innerHTML = '<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty } %>';
+<% end %>
 
