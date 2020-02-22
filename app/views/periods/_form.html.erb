@@ -1,0 +1,17 @@
+<%= simple_form_for([faculty, period], url: faculty_periods_path(faculty), remote: true) do |f| %>
+  <div class="form-row">
+    <div class="col">
+    <%= f.input :period_number, error_html: { id: 'period_number_error'} %>
+    </div>
+    <div class="col">
+      <%= f.input :start_time, input_html: { value: Time.parse("9:00")}, error_html: { id: 'start_time_error'} %>
+    </div>
+    <div class="col">
+      <%= f.input :minutes, input_html: { value: f.object.minutes || 100 } %>
+    </div>
+    <%= f.hidden_field :course, value: course.id %>
+    <%= f.hidden_field :faculty_id, value: faculty.id %>
+
+  </div>
+    <%= f.button :submit, 'Add period', class: 'btn btn-outline-primary' %>
+<% end %>

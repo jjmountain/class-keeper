@@ -1,0 +1,12 @@
+<%= simple_form_for(course_period, remote: true) do | course_form | %>
+  <div class="form-row">
+    <div class="col">
+      <%= course_form.input :day, as: :select, collection: CoursePeriod.days.keys.map { |k| [k, CoursePeriod.days[k]] }, error_html: { id: 'course-period-errors' } %>
+    </div>
+    <div class="col">
+      <%= course_form.association :period, collection: Period.where(faculty_id: faculty.id).order(:period_number), label_method: :class_time, value_method: :id, label: 'Periods', include_blank: false %>
+    </div>
+  </div>
+    <%= course_form.button :submit, "Choose periods", class: 'btn btn-outline-primary mb-4' %>
+    <%= course_form.hidden_field :course_id, value: course.id %>
+<% end %>

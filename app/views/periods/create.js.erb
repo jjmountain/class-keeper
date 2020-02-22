@@ -1,6 +1,33 @@
 
-var sel = document.querySelector('#course_period_period_id');
-var opt = document.createElement('option');
-opt.appendChild(document.createTextNode('<%= @period.class_time %>'));
-opt.value = "<%= @period.id %>";
-sel.appendChild(opt);
+function refreshPeriodForm(innerHTML) {
+  var periodForm = document.querySelector("#new_period");
+  periodForm.innerHTML = innerHTML;
+}
+
+function refreshCoursePeriodForm(innerHTML) {
+  var coursePeriodForm = document.querySelector('#new_course_period');
+  coursePeriodForm.innerHTML = innerHTML;
+}
+
+function addCoursePeriod(optionText, optionValue) {
+  var sel = document.querySelector('#course_period_period_id');
+  var opt = document.createElement('option');
+  opt.appendChild(document.createTextNode(optionText));
+  opt.value = optionValue;
+  sel.appendChild(opt);
+}
+
+function addPeriodBadge(innerHTML) {
+  document.querySelector('#existing-periods').innerHTML = innerHTML;
+  feather.replace();
+}
+
+<% if @period.errors.any? %>
+  refreshPeriodForm('<%= j render "periods/form", period: @period, faculty: @faculty, course: @course %>');
+<% else %>
+  addCoursePeriod('<%= @period.class_time %>', '<%= @period.id %>');
+  addPeriodBadge('<%= j render partial: 'periods/period', collection: Period.where(faculty_id: @course.faculty_id) %>');
+  refreshPeriodForm('<%= j render "periods/form", period: Period.new, faculty: @faculty, course: @course %>');
+  refreshCoursePeriodForm('<%= j render partial: 'course_periods/form', locals: { course_period: @course_period, faculty: @faculty, course: @course } %>');
+<% end %>
+

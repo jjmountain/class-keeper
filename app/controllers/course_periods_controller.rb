@@ -1,3 +1,4 @@
+
 class CoursePeriodsController < ApplicationController
   def create
     @course_period = CoursePeriod.new(
@@ -5,7 +6,13 @@ class CoursePeriodsController < ApplicationController
       course_id: course_period_params[:course_id],
       period_id: course_period_params[:period_id]
     )
-    if @course_period.save!
+    @course = Course.find(params[:course_period][:course_id])
+    @faculty = @course.faculty
+    if @course_period.save
+      respond_to do |format|
+        format.js
+      end
+    else
       respond_to do |format|
         format.js
       end
