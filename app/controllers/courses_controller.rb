@@ -16,21 +16,6 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user = current_user 
-
-    # if using selects then they will be created through nested attributes - no need to be concerned except update faculty school_id manually
-
-    # if user entered the school and faculty, grab it from params and add it manually to course
-    # if params[:course][:school] && params[:course][:faculty]
-    #   raise
-    #   @course.school_id = params[:course][:school]
-    #   @course.faculty_id = params[:course][:faculty]
-
-    # # if user only entered faculty, grab it from params and add it manually to course
-    # elsif params[:course][:faculty]
-    #   @course.faculty_id = params[:course][:faculty]
-    #   raise
-    # end
-
     if @course.save
       # set the faculty school id because form doesn't update it
       @course.faculty.school_id = @course.school_id
@@ -42,27 +27,27 @@ class CoursesController < ApplicationController
   end
 
   def edit
-   @course = Course.find(params[:id])
   end
 
   def update
     @course = Course.find(params[:id])
-    @course.update(
-      name: course_params[:name], 
-      description: course_params[:description], 
-      start_date: course_params[:start_date], 
-      end_date: course_params[:end_date], 
-      class_type: course_params[:class_type],
-      class_number: course_params[:class_number],
-      lessons_per_week: course_params[:lessons_per_week],
-      weeks_per_course: course_params[:weeks_per_course]
-    )
-    @course.user = current_user
-    @course.school_id = course_params[:school].to_i
-    @course.faculty_id = course_params[:faculty].to_i
-
+    @course.update(course_params)
     if @course.save
-      redirect_to course_path(@course), notice: 'Course successfully updated!'
+      respond_to do |format|
+        # an html request means the user is actually editing the course
+        format.html { redirect_to course_path(@course), notice: 'Course successfully updated!' }
+        # a ajax request means they are creating lessons
+        format.js do
+          CoursePeriod::DAYS
+          @planned_lessons = []
+          weeks = (@course.end_date - @course.start_date).to_i / 7
+          (1..weeks).to_a.each do | week |
+            @course.course_periods.each do | course_period |
+              course_period.day
+            end
+          end
+        end
+      end
     else
       render 'edit'
     end
@@ -81,6 +66,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:school_id, :faculty_id, :name, :description, :start_date, :end_date, :class_type, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name] )
+    params.require(:course).permit(:school_id, :faculty_id, :name, :description, :start_date, :end_date, :class_type, :classroom, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name], lessons_attributes: [:_destroy, :id, :date, :objective] )
   end
 end

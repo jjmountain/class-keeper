@@ -8,11 +8,15 @@
         <li class="breadcrumb-item active"><%= @course.name %></li>
     </ol>
   <% end %>
-  <div class="container-fluid mt-n10">
+  <div class="container-fluid mt-n10" data-controller='new-lessons'>
   <div class="row">
-  <div class="col-md-6 col-12">
-    <%= render 'lesson_times_card', course: @course, course_periods: @course_periods, course_period: @course_period, faculty: @faculty, period: @period %>
-  </div>  
+    <div class="col-md-6 col-12">
+      <%= render 'lesson_times_card', course: @course, course_periods: @course_periods, course_period: @course_period, faculty: @faculty, period: @period %>
+      <%= render 'create_lessons_form', course: @course %>  
+    </div>
+      <div class="col-md-6 col-12">
+        <%= render 'planned_lessons_form' %>
+      </div>
   </div>
   </div>
 </main>

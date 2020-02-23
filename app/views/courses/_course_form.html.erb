@@ -55,15 +55,7 @@
     <%= f.input :class_number, label: 'Class Number', wrapper_html: { class: 'col' } %>
     <%= f.input :class_type, collection: ['Speaking', 'Writing'], include_blank: true, label: 'Class Focus', wrapper_html: { class: 'col' } %>
   </div>
-
-  <div class="form-row">
-    <%= f.input :start_date, label: 'First Lesson Date', as: :string, input_html: { class: 'datepicker' }, wrapper_html: { class: 'col' } %>
-    <%= f.input :end_date, label: 'Last Lesson Date', as: :string, input_html: { class: 'datepicker' }, wrapper_html: { class: 'col' } %>
-    <%= f.input :weeks_per_course, label: 'Weeks in course', input_html: { class: 'w-10' }, wrapper_html: { class: 'col' } %>
-    <%= f.input :lessons_per_week, label: 'Lessons per week', input_html: { class: 'w-10' }, wrapper_html: { class: 'col' } %>
-  </div>
-
   <div class="form-actions">
-    <%= f.button :submit, "Register", class: 'btn btn-primary' %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>

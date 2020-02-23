@@ -6,11 +6,11 @@ export default class extends Controller {
   add_school_association(event) {
     event.preventDefault();
     var content = this.school_templateTarget.innerHTML.replace(/SCHOOL_TEMPLATE_RECORD/g, Math.floor(Math.random() * 20000))
+    console.log(content);
     this.add_schoolTarget.insertAdjacentHTML('beforebegin', content)
     this.add_schoolTarget.style.display = 'none';
     this.school_inputTarget.remove()
     this.add_faculty_association()
-    this.add_facultyTarget.remove()
   }
   
   add_faculty_association(event) {
