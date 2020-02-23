@@ -1,7 +1,7 @@
 <div class="col-6" id="period-<%=period.id %>">
   <div class="bg-light border-left sb-border-lg rounded border-primary pl-2 pr-1 py-2 mb-3 d-flex align-items-center justify-content-between">
   <%= "#{period.class_time}" %>
-  <%= link_to period_path(period), class: "btn sb-btn-transparent-dark sb-btn-icon", method: 'delete', remote: true, data: { confirm: "Are you sure you want to delete ##{period.period_number}: #{period.class_time}?" } do %>
+  <%= link_to period_path(period), class: "btn sb-btn-transparent-dark sb-btn-icon btn-sm", method: 'delete', remote: true, data: { confirm: "Are you sure you want to delete ##{period.period_number}: #{period.class_time}?" } do %>
     <i data-feather='x'></i>
   <% end %>
   </div>

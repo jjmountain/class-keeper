@@ -12,13 +12,13 @@ class Period < ApplicationRecord
 
 
   def class_time
-    "#{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M %P')}".strip()
+    "#{period_number}: #{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M %P')}".strip()
   end
 
   def end_time
     start_time + minutes.minutes
   end
-å
+
   def check_period_not_in_use
     # look through course periods where course id is the same as the period 
     if CoursePeriod.where.not(period_id: id).empty?
@@ -37,4 +37,4 @@ class Period < ApplicationRecord
       end
     end
   end
-åend
+end
