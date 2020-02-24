@@ -14,6 +14,7 @@ class LessonsController < ApplicationController
     @faculty = @course.faculty
     @course_period = CoursePeriod.new
     @course_periods = CoursePeriod.where(course_id: @course.id)
+    @lessons_schedule = LessonsSchedule.new
     @school = @course.school
     @lesson = Lesson.new
     @period = Period.new

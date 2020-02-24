@@ -38,14 +38,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to course_path(@course), notice: 'Course successfully updated!' }
         # a ajax request means they are creating lessons
         format.js do
-          CoursePeriod::DAYS
-          @planned_lessons = []
-          weeks = (@course.end_date - @course.start_date).to_i / 7
-          (1..weeks).to_a.each do | week |
-            @course.course_periods.each do | course_period |
-              course_period.day
-            end
-          end
+          
         end
       end
     else

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'lessons_schedules/create'
+  get 'lessons_schedules/update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'lessons/index'
   get 'lessons/show'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
     resources :enrollments, only: [ :index ] do 
       collection { post :import }
     end
+    resources :lessons_schedules, only: [ :create, :update ]
   end
 
   resources :course_periods, only: [ :create, :update, :destroy ]
