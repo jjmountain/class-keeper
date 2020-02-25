@@ -1,0 +1,18 @@
+function refreshScheduleForm(innerHTML) {
+  var scheduleForm = document.querySelector('#new_lessons_schedule');
+  scheduleForm.innerHTML = innerHTML;
+  flatpickr(".datepicker");
+}
+
+function appendLessons() {
+  var template = document.querySelector('#lesson_template');
+  var content = template.innerHTML.replace(/LESSON_TEMPLATE_RECORD/g, new Date().valueOf())
+  document.querySelector('#lessons-form').insertAdjacentHTML('beforeend', content)
+}
+
+<% if @lessons_schedule.errors.any? %>
+  refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
+<% else %>
+  refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
+  appendLessons();
+<% end %>

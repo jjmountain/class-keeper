@@ -1,0 +1,40 @@
+<div class="card sb-card-collapsable mb-4">
+  <a href="#coursePeriodsCard" data-toggle='collapse' role='button' aria-controls='coursePeriodsCard' class="card-header">
+  Lesson Times
+    <div>
+      <% course.course_periods.ordered.each do |course_period| %>
+        <span class="badge badge-light ml-3 border d-inline-flex align-items-center">
+          <%= "#{course_period.day} #{course_period.period.class_time}" %>
+        </span>
+      <% end %>
+    </div>
+    <div class="sb-card-collapsable-arrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+  </a>
+  <% show_periods = course.course_periods.empty? ? 'show' : '' %>
+  <div class="collapse <%= show_periods %>" id='coursePeriodsCard'>
+    <div class="card-body">
+    <div class="row" id='day-period'>
+      <% course_periods.ordered.each do | course_period | %>
+        <%= render partial: 'course_periods/period_badge', locals: { course_period: course_period } %>
+      <% end %>
+    </div>
+    <div data-controller='course-periods'>
+    <%= link_to "Add Lesson Times", "#", data: { action: "click->course-periods#toggle_course_periods_form" }, class: 'mb-2' %>
+      <div data-target='course-periods.course_period' style='display: none;' class='mt-3'>
+        <%= render partial: 'course_periods/form', locals: { course_period: course_period, faculty: faculty, course: course } %> 
+        <%= link_to "Edit Period Times for #{course.faculty.name}", "#", data: { action: "click->course-periods#toggle_periods_form" } %>   
+      </div>
+      <div class="periods" data-target='course-periods.periods' style='display: none;'>
+        <div class='row mt-4' id='existing-periods'>
+          <%= render partial: 'periods/period', collection: Period.where(faculty_id: course.faculty_id) %>
+        </div>
+        <div class='mt-3'>
+          <%= render 'periods/form', faculty: faculty, period: period, course: course %>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>

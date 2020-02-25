@@ -1,0 +1,32 @@
+function diff_weeks(dt1, dt2) {
+    var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= (60 * 60 * 24 * 7);
+    return Math.abs(Math.round(diff));
+  }
+
+function addLessonFields() {
+  var addedLessons = document.querySelector('#added_lessons');
+  var content = document.querySelector('#lesson_template').innerHTML.replace(/LESSON_TEMPLATE_RECORD/g, new Date().valueOf())
+  addedLessons.insertAdjacentHTML('beforeend', content);
+  flatpickr(".datepicker", {})
+}
+
+function planLessons() {
+  console.log('in planned lessons');
+  var courseStart = document.querySelector('#course_start_date');
+  var courseEnd = document.querySelector('#course_end_date');
+
+  const startDate = new Date(courseStart.value);
+  const endDate = new Date (courseEnd.value);
+
+  var weeks = diff_weeks(startDate, endDate);
+  startDate.setDate(startDate.getDate() + 7);
+  
+
+}
+
+<% if @course.errors.any? %>
+<% else %> 
+  planLessons();
+  addLessonFields();
+<% end %>

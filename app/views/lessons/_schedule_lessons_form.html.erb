@@ -1,0 +1,16 @@
+<%= simple_form_for([course, lessons_schedule], remote: true) do |f| %>
+  <div class="form-row">
+  <div class="col form-group">
+    <%= f.error :base %>
+  </div>
+  </div>
+  <div class="form-row">
+    <div class="col form-group">
+      <%= f.input :start_date, as: :string, label: 'First lesson date:', input_html: { class: 'datepicker form-control' } %>
+    </div>
+    <div class="col form-group">
+      <%= f.input :end_date, as: :string, label: 'Final lesson date:', input_html: { class: 'datepicker form-control' } %>
+    </div>
+  </div>
+    <%= f.submit "Schedule Lessons", class: 'btn btn-primary' %>
+<% end %>

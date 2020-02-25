@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'lessons_schedules/create'
-  get 'lessons_schedules/update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'lessons/index'
   get 'lessons/show'

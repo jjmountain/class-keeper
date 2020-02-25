@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">Planned Lessons</div>
+  <div class="card-body">
+  <%= simple_form_for(@course, remote: true, html: { id: 'lessons-form'}) do |f| %>
+
+   <template data-target='new-lessons.template' id='lesson_template'>
+     <%= f.simple_fields_for :lessons, Lesson.new, child_index: 'LESSON_TEMPLATE_RECORD' do |lesson| %>
+       <%= render 'lesson_fields', form: lesson %>
+    <% end %>
+   </template>
+  
+  <%= f.simple_fields_for :lessons do |lesson| %>
+    <%= render 'lesson_fields', form: lesson  %>
+  <% end %>
+  <div data-target='new-lessons.added_lessons' id='added_lessons'>
+  
+  </div>
+    <%= f.submit "Create Lessons", class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>
+
