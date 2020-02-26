@@ -6,8 +6,8 @@ class PeriodsController < ApplicationController
     @course = Course.find(params[:period][:course])
     @period = Period.new(period_params)
     @faculty = @period.faculty
-    @period.faculty = @faculty
     @period.save
+    authorize @period
   end
 
   def destroy

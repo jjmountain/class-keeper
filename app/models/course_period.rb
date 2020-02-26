@@ -4,7 +4,7 @@ class CoursePeriod < ApplicationRecord
   belongs_to :period
   enum day: DAYS
   validates :day, presence: true
-  validates :day, uniqueness: { scope: :period_id, message: 'and period are already selected' }
+  validates :period_id, uniqueness: { scope: :day, message: 'and period are already selected' }
   scope :ordered, -> { 
     order(:day).joins(:period).merge(Period.order(:period_number))
    }

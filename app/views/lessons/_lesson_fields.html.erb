@@ -1,10 +1,17 @@
 <div class='nested-fields'>
-  <div class='form-group'>
     <%= form.hidden_field :_destroy %>
-    
-    <%= form.input :date, label: "Lesson Date:", as: :string, required: false, input_html: {class: "datepicker"}   %>
-    <small>
-      <%= link_to "Remove", "#", data: { action: "click->new-lessons#remove_lesson" } %>
-    </small>
+  <div class='form-group'>
+    <div class="col ">
+      <div class="lesson-period-number">
+      </div>
+    </div>
+    <div class="col">
+      <%= form.input :date, label: "Lesson Date:", as: :string, required: false, input_html: {class: "datepicker date-input", value: ''}   %>
+    </div>
+    <div class="col">
+      <small>
+        <%= link_to "Remove", "#", data: { action: "click->new-lessons#remove_lesson" } %>
+      </small>
+    </div>
   </div>
 </div>

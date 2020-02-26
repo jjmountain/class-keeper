@@ -4,15 +4,19 @@ function refreshScheduleForm(innerHTML) {
   flatpickr(".datepicker");
 }
 
-function appendLessons() {
+function appendLessons(lesson_array) {
+  document.querySelector('#added_lessons').innerHTML = '';
   var template = document.querySelector('#lesson_template');
-  var content = template.innerHTML.replace(/LESSON_TEMPLATE_RECORD/g, new Date().valueOf())
-  document.querySelector('#lessons-form').insertAdjacentHTML('beforeend', content)
+  var dateIndex = new Date().valueOf();
+  var content = template.innerHTML.replace(/LESSON_TEMPLATE_RECORD/g, dateIndex);
+  var content = template.innerHTML.replace(/value=""/g, `value='${lesson_array[1]}'`);
+  document.querySelector('#added_lessons').insertAdjacentHTML('beforeend', content);
+  alert(template);
 }
 
 <% if @lessons_schedule.errors.any? %>
   refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
 <% else %>
+  <%= raw @dates_array %>.forEach(lesson_array => appendLessons(lesson_array));
   refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
-  appendLessons();
 <% end %>

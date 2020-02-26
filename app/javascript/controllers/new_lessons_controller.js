@@ -21,7 +21,9 @@ export default class extends Controller {
   remove_lesson(event) {
     event.preventDefault()
     let item = event.target.closest(".nested-fields")
-    item.querySelector("input[name*='_destroy']").value = 1
+    var field = item.querySelector("input[name*='_destroy']")
+    console.log(field);
+    field.value = 1
     item.style.display = 'none'
   }
 }

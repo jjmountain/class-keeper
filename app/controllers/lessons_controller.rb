@@ -16,8 +16,9 @@ class LessonsController < ApplicationController
     @course_periods = CoursePeriod.where(course_id: @course.id)
     @lessons_schedule = LessonsSchedule.new
     @school = @course.school
-    @lesson = Lesson.new
+    @lesson = Lesson.new(course_id: params[:course_id])
     @period = Period.new
+    authorize @lesson
   end
 
   def create

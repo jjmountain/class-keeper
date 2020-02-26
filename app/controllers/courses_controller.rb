@@ -6,11 +6,13 @@ class CoursesController < ApplicationController
   end
 
   def show
+    authorize @course
     @enrollments = Enrollment.where(course_id: params[:id])
   end
 
   def new
     @course = Course.new
+    authorize @course
   end
 
   def create
@@ -38,12 +40,12 @@ class CoursesController < ApplicationController
         format.html { redirect_to course_path(@course), notice: 'Course successfully updated!' }
         # a ajax request means they are creating lessons
         format.js do
-          
         end
       end
     else
       render 'edit'
     end
+    authorize @course
   end
 
   def destroy

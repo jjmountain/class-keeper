@@ -11,12 +11,13 @@ class CalculateSchedule
         next_lesson_day_diff = CoursePeriod::DAYS.index(course_period.day) - next_date.wday 
         next_date += next_lesson_day_diff.days
         if next_date <= lessons_schedule.end_date
-          planned_lessons << next_date
+          date_period_array = [course_period.period.period_number, next_date.strftime('%Y-%m-%d')]
+          planned_lessons << date_period_array
         end
       end
       next_date = next_date.next_week
     end
-    planned_lessons 
+    planned_lessons
   end
 
 end

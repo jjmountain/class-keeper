@@ -1,6 +1,7 @@
 class LessonsSchedulesController < ApplicationController
   
   def create
+    skip_authorization
     @lessons_schedule = LessonsSchedule.new(lessons_schedule_params)
     @lessons_schedule.course_id = params[:course_id]
     @course = Course.find(params[:course_id])

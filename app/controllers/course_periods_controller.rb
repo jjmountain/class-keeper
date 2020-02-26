@@ -1,6 +1,7 @@
 
 class CoursePeriodsController < ApplicationController
   def create
+    skip_authorization
     @course_period = CoursePeriod.new(
       day: course_period_params[:day].to_i,
       course_id: course_period_params[:course_id],
@@ -25,6 +26,7 @@ class CoursePeriodsController < ApplicationController
     respond_to do |format|
       format.js
     end
+    authorize @course_period
   end
 
   private
