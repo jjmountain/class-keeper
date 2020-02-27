@@ -25,6 +25,7 @@ gem 'webpacker'
 # my gems
 gem 'wicked'
 gem 'pundit'
+gem 'geocoder'
 
 
 group :development do

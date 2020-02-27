@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_120946) do
+ActiveRecord::Schema.define(version: 2020_02_27_024450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,9 @@ ActiveRecord::Schema.define(version: 2020_02_26_120946) do
   create_table "faculties", force: :cascade do |t|
     t.string "name"
     t.bigint "school_id"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.index ["school_id"], name: "index_faculties_on_school_id"
   end
 
