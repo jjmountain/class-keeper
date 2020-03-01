@@ -14,7 +14,7 @@ class LessonsController < ApplicationController
     @faculty = @course.faculty
     @course_period = CoursePeriod.new
     @course_periods = CoursePeriod.where(course_id: @course.id)
-    @lessons_schedule = LessonsSchedule.new
+    @lessons_schedule = LessonsSchedule.find_by(course_id: params[:course_id])
     @school = @course.school
     @lesson = Lesson.new(course_id: params[:course_id])
     @period = Period.new
@@ -25,5 +25,11 @@ class LessonsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  
+  def lesson_params
+    params.require(:lesson).permit(:course_id)
   end
 end

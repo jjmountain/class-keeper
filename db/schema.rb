@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_024450) do
+ActiveRecord::Schema.define(version: 2020_03_01_043848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_024450) do
     t.interval "duration"
     t.bigint "course_id"
     t.bigint "course_period_id"
+    t.boolean "holiday", default: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
     t.index ["course_period_id"], name: "index_lessons_on_course_period_id"
   end

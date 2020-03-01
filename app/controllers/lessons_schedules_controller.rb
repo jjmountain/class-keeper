@@ -10,9 +10,6 @@ class LessonsSchedulesController < ApplicationController
     end
   end
 
-  def update
-  end
-
   private
 
   def lessons_schedule_params

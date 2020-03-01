@@ -21,7 +21,7 @@
               <% icon_type = course.class_type == 'Speaking' ? 'message-circle' : 'edit-2' %>
                     <div class="sb-nav-link-icon"><i data-feather=<%= icon_type %>></i></div><%= course.name %>                  
                     <% unless course.course_periods.empty? %>
-                       <% course.course_periods.first(2).each do |course_period| %>
+                       <% course.course_periods.ordered.first(2).each do |course_period| %>
                         <% course_period_string = "#{course_period.day} #{course_period.period.period_number.to_s}" %>
                          <span class="badge badge-light d-flex align-items-center ml-2" style='border: #e1e1e0 solid 1px; color: grey; font-weight: 100; background: transparent;'>
                         <%= course_period_string %></span>

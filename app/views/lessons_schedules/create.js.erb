@@ -4,14 +4,34 @@ function refreshScheduleForm(innerHTML) {
   flatpickr(".datepicker");
 }
 
+function addElementToRow(element, value, fields) {
+  let regExp = new RegExp(element, 'g');
+  let divToChange = `${element}${value}` 
+  let modifiedRow = fields.replace(regExp, divToChange);
+  return modifiedRow;
+}
+
 function appendLessons(lesson_array) {
-  document.querySelector('#added_lessons').innerHTML = '';
-  var template = document.querySelector('#lesson_template');
-  var dateIndex = new Date().valueOf();
-  var content = template.innerHTML.replace(/LESSON_TEMPLATE_RECORD/g, dateIndex);
-  var content = template.innerHTML.replace(/value=""/g, `value='${lesson_array[1]}'`);
-  document.querySelector('#added_lessons').insertAdjacentHTML('beforeend', content);
-  alert(template);
+  let newId = new Date().getTime() + Math.floor(Math.random() * 100000)
+  let link = document.querySelector('.add_fields');
+  let linkId = link.dataset.id;
+  let regexp = linkId ? new RegExp(linkId, 'g') : null ;
+  let newFields = regexp ? link.dataset.fields.replace(regexp, newId) : null ;
+
+  let withLessonWeek = addElementToRow('<div class="lesson-week">', `Week ${lesson_array[2]}`, newFields);
+  let withLessonDay = addElementToRow('<div class="lesson-day">', lesson_array[3], withLessonWeek);
+  let withLessonPeriod = addElementToRow('<div class="lesson-period">', `Period ${lesson_array[4]}`, withLessonDay);
+  let withLessonDate = addElementToRow('<div class="lesson-date">', lesson_array[5], withLessonPeriod);
+
+  let valueRegexp = new RegExp(`value=""`, 'g');
+  let valueField = `value="${lesson_array[1]}"`
+  let newerFields = withLessonDate.replace(valueRegexp, valueField);
+
+  let hiddenFieldId = `id="course_lessons_attributes_${newId}_course_period_id"`
+  let hiddenIdRegexp = new RegExp(hiddenFieldId, 'g')
+  let finalFields = newerFields.replace(hiddenIdRegexp, `${hiddenFieldId} value="${lesson_array[0]}"`)
+
+  link.insertAdjacentHTML('beforebegin', finalFields);
 }
 
 <% if @lessons_schedule.errors.any? %>

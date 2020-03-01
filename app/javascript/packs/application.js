@@ -13,6 +13,6 @@ import 'assets/stylesheets/styles.css'
 import '@fortawesome/fontawesome-free/js/all'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-
 require('./nested-forms/addFields');
 require('./nested-forms/removeFields');
+

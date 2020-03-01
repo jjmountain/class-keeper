@@ -8,10 +8,14 @@ class CoursesController < ApplicationController
   def show
     authorize @course
     @enrollments = Enrollment.where(course_id: params[:id])
+    @lessons = @course.lessons
   end
 
   def new
     @course = Course.new
+    if @lessons_schedule.save 
+      @dates_array = CalculateSchedule.call(@lessons_schedule)
+     end
     authorize @course
   end
 
@@ -36,7 +40,7 @@ class CoursesController < ApplicationController
     @course.update(course_params)
     if @course.save
       respond_to do |format|
-        # an html request means the user is actually editing the course
+        # an html request means the user is actually editing the course or adding lessons
         format.html { redirect_to course_path(@course), notice: 'Course successfully updated!' }
         # a ajax request means they are creating lessons
         format.js do
@@ -61,6 +65,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:school_id, :faculty_id, :name, :description, :start_date, :end_date, :class_type, :classroom, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name], lessons_attributes: [:_destroy, :id, :date, :objective] )
+    params.require(:course).permit(:school_id, :faculty_id, :name, :description, :start_date, :end_date, :class_type, :classroom, :class_number, :lessons_per_week, :weeks_per_course, faculty_attributes: [:id, :name, :max_absences, :school_id], school_attributes: [:id, :name], lessons_attributes: [:_destroy, :id, :date, :objective, :course_period_id, :holiday] )
   end
 end
