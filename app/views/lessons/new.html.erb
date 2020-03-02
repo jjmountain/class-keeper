@@ -12,9 +12,7 @@
   <div class="row">
     <div class="col-md-6 col-12">
       <%= render 'lesson_times_card', course: @course, course_periods: @course_periods, course_period: @course_period, faculty: @faculty, period: @period %>
-      <% unless @lessons_schedule %>
         <%= render 'schedule_lessons_card', course: @course, lessons_schedule: LessonsSchedule.new %>
-      <% end %>
     </div>
       <div class="col-md-6 col-12">
         <%= render 'planned_lessons_form' %>

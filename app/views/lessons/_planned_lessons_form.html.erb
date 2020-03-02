@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header">Planned Lessons</div>
   <div class="card-body">
-  <div class='text-right'>Holiday?</div>
+  <div class='text-right'>Day off?</div>
   <%= form_with model: @course, local: true do |f| %>
-<div class="form-group">
+<div class="form-group planned-lessons-grid">
   <%= f.fields_for :lessons do |lesson| %>
     <%= render 'planned_lesson_fields', f: lesson %>
   <% end %>
