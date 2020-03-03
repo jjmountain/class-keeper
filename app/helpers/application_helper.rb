@@ -30,7 +30,6 @@ module ApplicationHelper
         render(association.to_s.singularize + "_fields", f: builder)
     end
 
-
     # This renders a simple link, but passes information into `data` attributes.
         # This info can be named anything we want, but in this case we chose `data-id:` and `data-fields:`.
     # The `id:` is from `new_object.object_id`.
@@ -38,6 +37,5 @@ module ApplicationHelper
         # We use `gsub("\n", "")` to remove anywhite space from the rendered partial.
     # The `id:` value needs to match the value used in `child_index: id`.
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
-    
     end
 end

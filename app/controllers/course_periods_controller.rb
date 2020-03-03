@@ -22,11 +22,11 @@ class CoursePeriodsController < ApplicationController
 
   def destroy
     @course_period = CoursePeriod.find(params[:id])
+    authorize @course_period
     @course_period.destroy
     respond_to do |format|
       format.js
     end
-    authorize @course_period
   end
 
   private

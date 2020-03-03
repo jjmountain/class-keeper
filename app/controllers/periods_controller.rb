@@ -17,6 +17,7 @@ class PeriodsController < ApplicationController
         format.js
       end
     end
+    authorize @period
   end
 
   private

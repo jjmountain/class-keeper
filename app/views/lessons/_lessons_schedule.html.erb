@@ -1,0 +1,17 @@
+<div id='schedule-<%= lessons_schedule.id %>'> 
+<strong></strong>
+  <div class="bg-light border-left sb-border-lg text-center rounded border-secondary pl-2 pr-1 py-2 mb-3 d-flex align-items-center justify-content-around">
+    <span>
+      <%= lessons_schedule.date_with_day(lessons_schedule.start_date) %>
+    </span>
+    <span>
+      -
+    </span>
+    <span>
+      <%= lessons_schedule.date_with_day(lessons_schedule.end_date) %>
+    </span>
+    <%= link_to lessons_schedule_path(lessons_schedule), class: "btn sb-btn-transparent-dark sb-btn-icon btn-sm", method: 'delete', remote: true, data: { confirm: "Are you sure you want to delete lesson schedule: #{lessons_schedule.date_with_day(lessons_schedule.start_date)} - #{lessons_schedule.date_with_day(lessons_schedule.end_date)}?" } do %>
+      <i data-feather='x'></i>
+    <% end %>
+  </div>
+</div>

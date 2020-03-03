@@ -1,0 +1,22 @@
+<table id='dttb' class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Lesson Date</th>
+      <th>Period</th>
+      <th>Objectives</th>
+      <th>Planned?</th>
+      <th>Homework</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% lessons.each do | lesson | %>
+      <tr>
+        <td><%= lesson.week %></td>
+        <td><%= lesson.date_with_day %></td>
+        <td><%= lesson.course_period.period.period_number %></td>
+        <td><%= link_to "Enter", lesson_path(lesson) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

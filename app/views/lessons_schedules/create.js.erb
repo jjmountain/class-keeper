@@ -1,5 +1,5 @@
-function refreshScheduleForm(innerHTML) {
-  var scheduleForm = document.querySelector('#new_lessons_schedule');
+function refreshForm(innerHTML, selector) {
+  var scheduleForm = document.querySelector(selector);
   scheduleForm.innerHTML = innerHTML;
   flatpickr(".datepicker");
 }
@@ -19,24 +19,40 @@ function appendLessons(lesson_array) {
   let newFields = regexp ? link.dataset.fields.replace(regexp, newId) : null ;
 
   let withLessonWeek = addElementToRow('<div class="lesson-week">', `Week ${lesson_array[2]}`, newFields);
-  let withLessonDay = addElementToRow('<div class="lesson-day">', lesson_array[3], withLessonWeek);
-  let withLessonPeriod = addElementToRow('<div class="lesson-period">', `Period ${lesson_array[4]}`, withLessonDay);
-  let withLessonDate = addElementToRow('<div class="lesson-date">', lesson_array[5], withLessonPeriod);
+  let withLessonDay = addElementToRow('<div class="lesson-day">', lesson_array[4], withLessonWeek);
+  let withLessonPeriod = addElementToRow('<div class="lesson-period">', `Period ${lesson_array[5]}`, withLessonDay);
+  let withLessonDate = addElementToRow('<div class="lesson-date">', lesson_array[6], withLessonPeriod);
 
   let valueRegexp = new RegExp(`value=""`, 'g');
   let valueField = `value="${lesson_array[1]}"`
   let newerFields = withLessonDate.replace(valueRegexp, valueField);
 
+  let weekFieldId = `id="course_lessons_attributes_${newId}_week"`
+  let weekIdRegexp = new RegExp(weekFieldId, 'g')
+  let withWeekFields = newerFields.replace(weekIdRegexp, `${weekFieldId} value="${lesson_array[2]}"`)
+  
+  let lessonsSchedulesId = `id="course_lessons_attributes_${newId}_lessons_schedules_id"`;
+  let lessonsSchedulesRegex = new RegExp(lessonsSchedulesId, 'g');
+  let withLessonsSchedulesFields = withWeekFields.replace(lessonsSchedulesRegex, `${lessonsSchedulesId} value="${lesson_array[3]}"`);
+
   let hiddenFieldId = `id="course_lessons_attributes_${newId}_course_period_id"`
   let hiddenIdRegexp = new RegExp(hiddenFieldId, 'g')
-  let finalFields = newerFields.replace(hiddenIdRegexp, `${hiddenFieldId} value="${lesson_array[0]}"`)
-
+  let finalFields = withLessonsSchedulesFields.replace(hiddenIdRegexp, `${hiddenFieldId} value="${lesson_array[0]}"`);
   link.insertAdjacentHTML('beforebegin', finalFields);
 }
 
+function appendLessonsSchedule(innerHTML) {
+  var scheduleLessonsCard = document.querySelector('#schedule-lessons-card');
+  scheduleLessonsCard.innerHTML = innerHTML;
+  scheduleLessonsCard.firstElementChild.setAttribute('id', `schedule-<%= raw @lessons_schedule.id %>`);
+  feather.replace();
+}
+
+
 <% if @lessons_schedule.errors.any? %>
-  refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
+  refreshForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>', '#schedule-lessons-form');
 <% else %>
   <%= raw @dates_array %>.forEach(lesson_array => appendLessons(lesson_array));
-  refreshScheduleForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
+  refreshForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>', '#new_lessons_schedule');
+  appendLessonsSchedule('<%= j render 'lessons/lessons_schedule', lessons_schedule: @lessons_schedule %>');
 <% end %>

@@ -1,21 +1,19 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get 'lessons/index'
-  get 'lessons/show'
-  get 'lessons/new'
-  get 'lessons/create'
-  get 'lessons/destroy'
   # get 'courses/index'
   # get 'courses/:id', to: 'courses#show', as: :course
   resources :courses do
     get 'lessons/preview', to: 'lessons#preview'
-    resources :lessons, only: [ :index, :show, :new, :create, :edit, :update ]    
+    resources :lessons, only: [ :index, :new, :create ]    
     resources :enrollments, only: [ :index ] do 
       collection { post :import }
     end
     resources :lessons_schedules, only: [ :create, :update ]
   end
 
+  resources :lessons_schedules, only: [ :destroy ]
+
+  resources :lessons, only: [ :show, :edit, :update, :destroy ]
   resources :course_periods, only: [ :create, :update, :destroy ]
 
   resources :schools, only: [ :new, :create, :edit, :update] do

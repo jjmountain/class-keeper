@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_043848) do
+ActiveRecord::Schema.define(version: 2020_03_03_090235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,8 +123,12 @@ ActiveRecord::Schema.define(version: 2020_03_01_043848) do
     t.bigint "course_id"
     t.bigint "course_period_id"
     t.boolean "holiday", default: false
+    t.integer "week"
+    t.bigint "lessons_schedules_id"
+    t.boolean "started", default: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
     t.index ["course_period_id"], name: "index_lessons_on_course_period_id"
+    t.index ["lessons_schedules_id"], name: "index_lessons_on_lessons_schedules_id"
   end
 
   create_table "lessons_schedules", force: :cascade do |t|
@@ -216,6 +220,7 @@ ActiveRecord::Schema.define(version: 2020_03_01_043848) do
   add_foreign_key "lesson_sections", "lessons"
   add_foreign_key "lessons", "course_periods"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "lessons", "lessons_schedules", column: "lessons_schedules_id"
   add_foreign_key "lessons_schedules", "courses"
   add_foreign_key "periods", "faculties"
   add_foreign_key "tasks", "attendances"

@@ -5,7 +5,10 @@ class LessonPolicy < ApplicationPolicy
     end
   end
 
-  def show? ; user_is_owner_of_record? ; end
+  def show?
+    user == record.course.user
+  end
+  
   def new?
     @user.class == User
   end

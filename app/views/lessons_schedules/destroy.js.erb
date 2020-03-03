@@ -1,0 +1,21 @@
+function removeLessonsSchedule() {
+  console.log(`#schedule-<%= raw @lessons_schedule.id%>`);
+  var lessonsSchedule = document.querySelector(`#schedule-<%= raw @lessons_schedule.id%>`);
+  lessonsSchedule.remove();
+  var inputsToRemove = document.querySelectorAll("input[value='<%= raw @lessons_schedule.id%>']");
+  inputsToRemove.forEach(input => input.parentNode.remove());
+}
+
+function displayLessonsScheduleErrors(innerHTML) {
+  var lessonsScheduleCard = document.querySelector('#schedule-lessons-card');
+  lessonsScheduleCard.insertAdjacentHTML('afterbegin', innerHTML)
+}
+
+function refereshForm(innerHTML){
+  var newLessonsSchedule = document.querySelector('#schedule-lessons-form');
+  newLessonsSchedule.innerHTML = innerHTML;
+  flatpickr(".datepicker");
+}
+
+removeLessonsSchedule();
+refereshForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');

@@ -1,21 +1,13 @@
-<div class="card">
-  <div class="card-header">Planned Lessons</div>
-  <div class="card-body">
   <div class='text-right'>Day off?</div>
-  <%= form_with model: @course, local: true do |f| %>
+
+<%= form_with model: course, local: true do |f| %>
 <div class="form-group planned-lessons-grid">
   <%= f.fields_for :lessons do |lesson| %>
     <%= render 'planned_lesson_fields', f: lesson %>
   <% end %>
   <%= link_to_add_fields "Add Lessons", f, :lessons %>
 </div>
-
   <div id='added_lessons'>
-  
   </div>
-
     <%= f.submit "Create Lessons", class: 'btn btn-primary' %>
   <% end %>
-  </div>
-</div>
-
