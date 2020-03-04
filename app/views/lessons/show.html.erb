@@ -1,2 +1,9 @@
-<h1>Lessons#show</h1>
-<p>Find me in app/views/lessons/show.html.erb</p>
+<%= render layout: 'shared/page_header_light', locals: { title: "#{@course.name}", subtitle: "Week #{@lesson.week} - #{@lesson.date_with_day(@lesson.date)} - #{@lesson.course_period.period.class_time}", feather_icon: 'layout' } do %>
+        <%= link_to edit_course_path(@course), class: 'btn sb-btn-transparent-light sb-btn-icon edit-button' do %> <i data-feather="edit"></i><% end %>
+      <ol class="breadcrumb mt-4 mb-0">
+        <li class="breadcrumb-item"><%= @course.school.name %></li>
+        <li class="breadcrumb-item"><%= @course.faculty.name %></li>
+        <li class="breadcrumb-item active"><%= @course.name %></li>
+    </ol>
+
+  <% end %>

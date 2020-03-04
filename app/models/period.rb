@@ -12,7 +12,7 @@ class Period < ApplicationRecord
 
 
   def class_time
-    "#{period_number}: #{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M %P')}".strip()
+    "#{start_time.strftime('%H:%M')} - #{end_time.strftime('%H:%M %P')}".strip()
   end
 
   def end_time

@@ -13,9 +13,6 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-    if @lessons_schedule.save 
-      @dates_array = CalculateSchedule.call(@lessons_schedule)
-     end
     authorize @course
   end
 

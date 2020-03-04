@@ -1,5 +1,4 @@
 function removeLessonsSchedule() {
-  console.log(`#schedule-<%= raw @lessons_schedule.id%>`);
   var lessonsSchedule = document.querySelector(`#schedule-<%= raw @lessons_schedule.id%>`);
   lessonsSchedule.remove();
   var inputsToRemove = document.querySelectorAll("input[value='<%= raw @lessons_schedule.id%>']");

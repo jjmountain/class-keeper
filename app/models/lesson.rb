@@ -4,7 +4,4 @@ class Lesson < ApplicationRecord
   has_many :lesson_sections
   has_many :attendances
 
-  def date_with_day
-    date.strftime('%a %b %e, %Y')
-  end
 end

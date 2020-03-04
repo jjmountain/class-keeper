@@ -4,17 +4,19 @@
       <th>Week</th>
       <th>Lesson Date</th>
       <th>Period</th>
-      <th>Objectives</th>
-      <th>Planned?</th>
+      <th>Activities</th>
       <th>Homework</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
   <% lessons.each do | lesson | %>
       <tr>
         <td><%= lesson.week %></td>
-        <td><%= lesson.date_with_day %></td>
+        <td><%= lesson.date_with_day(lesson.date) %></td>
         <td><%= lesson.course_period.period.period_number %></td>
+        <td></td>
+        <td></td>
         <td><%= link_to "Enter", lesson_path(lesson) %></td>
       </tr>
   <% end %>

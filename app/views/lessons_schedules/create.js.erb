@@ -1,5 +1,6 @@
-function refreshForm(innerHTML, selector) {
-  var scheduleForm = document.querySelector(selector);
+function refreshCreateForm(innerHTML) {
+  let scheduleForm = document.querySelector('#schedule-lessons-form');
+  console.log(scheduleForm);
   scheduleForm.innerHTML = innerHTML;
   flatpickr(".datepicker");
 }
@@ -43,16 +44,16 @@ function appendLessons(lesson_array) {
 
 function appendLessonsSchedule(innerHTML) {
   var scheduleLessonsCard = document.querySelector('#schedule-lessons-card');
-  scheduleLessonsCard.innerHTML = innerHTML;
+  scheduleLessonsCard.insertAdjacentHTML('beforeend', innerHTML);
   scheduleLessonsCard.firstElementChild.setAttribute('id', `schedule-<%= raw @lessons_schedule.id %>`);
   feather.replace();
 }
 
 
 <% if @lessons_schedule.errors.any? %>
-  refreshForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>', '#schedule-lessons-form');
+  refreshCreateForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>');
 <% else %>
-  <%= raw @dates_array %>.forEach(lesson_array => appendLessons(lesson_array));
-  refreshForm('<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>', '#new_lessons_schedule');
   appendLessonsSchedule('<%= j render 'lessons/lessons_schedule', lessons_schedule: @lessons_schedule %>');
+  <%= raw @dates_array %>.forEach(lesson_array => appendLessons(lesson_array));
+  refreshCreateForm(`<%= j render 'lessons/schedule_lessons_form', course: @course, lessons_schedule: @lessons_schedule %>`);
 <% end %>
