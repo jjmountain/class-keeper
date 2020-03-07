@@ -1,2 +1,23 @@
-<h1>Lessons#index</h1>
-<p>Find me in app/views/lessons/index.html.erb</p>
+<main>
+<%= render layout: 'shared/page_header', locals: { title: "#{@course.name}", subtitle: "Lessons", feather_icon: 'layout' } do %>
+        <%= link_to edit_course_path(@course), class: 'btn sb-btn-transparent-light sb-btn-icon edit-button' do %> <i data-feather="edit"></i><% end %>
+      <ol class="breadcrumb mt-4 mb-0">
+        <li class="breadcrumb-item"><%= @course.school.name %></li>
+        <li class="breadcrumb-item"><%= @course.faculty.name %></li>
+        <li class="breadcrumb-item active"><%= @course.name %></li>
+    </ol>
+
+  <% end %>
+
+    <div class="container-fluid mt-n10">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <%= render partial: 'lessons_table', locals: { lessons: @lessons } %>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </main>

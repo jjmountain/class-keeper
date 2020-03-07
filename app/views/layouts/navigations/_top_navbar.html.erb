@@ -62,7 +62,11 @@
       </li>
       <li class="nav-item dropdown no-caret mr-3 sb-dropdown-user">
           <a class="btn sb-btn-icon sb-btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= cl_image_tag(current_member.photo.key, width: 40, :gravity=>"face") %></a>
+          <% if current_member.photo.attached? %>
+            <%= cl_image_tag(current_member.photo.key, width: 40, :gravity=>"face", :default_image=> 'default_avatar.png') %></a>
+          <% else %>
+            <%= cl_image_tag('default_avatar.png', width: 40, :gravity=>"face") %></a>
+          <% end %>
           <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
               <h6 class="dropdown-header d-flex align-items-center">
                   <div class="sb-dropdown-user-details">

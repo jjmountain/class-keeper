@@ -43,7 +43,7 @@
       </a>
       <div class="collapse show" id="lessonsCard">
         <div class="card-body">
-        <%= render partial: 'courses/lessons_table', locals: { lessons: @lessons } %>
+        <%= render partial: 'lessons/lessons_table', locals: { lessons: @lessons } %>
         <%= link_to "Add some lessons", new_course_lesson_path(@course), class: 'btn btn-outline-primary' %>
           
         </div>

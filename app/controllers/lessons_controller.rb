@@ -1,10 +1,15 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [ :show ]
 
-  def preview
-  end
-  
   def index
+    @course = Course.find(params[:course_id])
+    @lessons = policy_scope(@course.lessons)
+  end
+
+  def setup
+    @lesson = Lesson.find(params[:lesson_id])
+    authorize @lesson
+    @course = @lesson.course
   end
 
   def show

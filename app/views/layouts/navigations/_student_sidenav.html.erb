@@ -1,6 +1,6 @@
   <div class="sb-sidenav-menu-heading">Courses</div>
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-        <% current_student.courses.each do |course| %>
+  <% current_student.courses.each do |course| %>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts-<%= course.id %>" aria-expanded="false" aria-controls="collapseLayouts">
           <% icon = course.class_type == 'speaking' ? 'message-square' : 'pen-tool'  %>
           <div class="sb-nav-link-icon">
             <i data-feather=<%= icon %>></i>
@@ -9,22 +9,11 @@
           <div class="sb-sidenav-collapse-arrow">
             <i class="fas fa-angle-down"></i>
           </div>
-        <% end %>
     </a>
-    <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
+    <div class="collapse" id="collapseLayouts-<%= course.id %>" data-parent="#accordionSidenav">
       <nav class="sb-sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayoutsPageHeaders" aria-expanded="false" aria-controls="collapseLayoutsPageHeaders">
-        Lessons
-          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-        </a>  
-        <div class="collapse" id="collapseLayoutsPageHeaders" data-parent="#accordionSidenavLayout">
-          <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="header-simplified.html">Simplified</a>
-            <a class="nav-link" href="header-overlap.html">Content Overlap</a>
-            <a class="nav-link" href="header-breadcrumbs.html">Breadcrumbs</a>
-            <a class="nav-link" href="header-light.html">Light</a>
-          </nav>
-        </div>
+          <%= link_to "Lessons", course_lessons_path(course), class: 'nav-link' %>
           <a class="nav-link" href="layout-static.html">Grades</a>
       </nav>
     </div>
+  <% end %>

@@ -11,9 +11,12 @@ Rails.application.routes.draw do
     resources :lessons_schedules, only: [ :create, :update ]
   end
 
+
   resources :lessons_schedules, only: [ :destroy ]
 
-  resources :lessons, only: [ :show, :edit, :update, :destroy ]
+  resources :lessons, only: [ :show, :edit, :update, :destroy ] do
+    get 'setup', to: 'lessons#setup'
+  end
   resources :course_periods, only: [ :create, :update, :destroy ]
 
   resources :schools, only: [ :new, :create, :edit, :update] do
