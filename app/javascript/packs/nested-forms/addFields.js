@@ -3,7 +3,6 @@ class addFields {
     
     // This executes when the function is instantiated.
     constructor(){
-      console.log('making a class')
         this.links = document.querySelectorAll('.add_fields');
         this.iterateLinks();
     }
@@ -41,4 +40,7 @@ class addFields {
 }
 
 // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work 
-new addFields()
+
+$(document).on('turbolinks:load', function () {
+  new addFields()
+})

@@ -4,7 +4,6 @@ class removeFields {
   constructor(){
       this.links = document.querySelectorAll('.remove_fields');
       this.iterateLinks();
-      console.log('remove fields constructor', this.links);
   }
 
   iterateLinks() {
@@ -38,5 +37,7 @@ class removeFields {
 
 }
 
-// Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work 
-new removeFields();
+// Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
+$(document).on('turbolinks:load', function () {
+  new removeFields();
+})

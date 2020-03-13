@@ -23,7 +23,7 @@ class Student < ApplicationRecord
   def schools
     enrollments.map { |enrollment| enrollment.course.school } 
   end
-  
+
 
   # return all the lessons that the student is enrolled in
   # lesson belongs to a course, a course has many enrollments, and enrollments have student ids
@@ -31,4 +31,9 @@ class Student < ApplicationRecord
     Lesson.joins(course: [ { enrollments: :student } ]).where(enrollments: { student_id: id })
   end
 
+ 
+  def self.online
+    ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers "online"
+    where(id: ids)
+  end
 end

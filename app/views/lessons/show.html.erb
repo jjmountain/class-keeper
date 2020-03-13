@@ -6,4 +6,16 @@
         <li class="breadcrumb-item active"><%= @course.name %></li>
     </ol>
 
+    <div class="card">
+      <div class="card-header">
+        Students Online
+      </div>
+      <div class="card-body">
+        <ul>
+          <% Student.online.each do |student| %>
+            <li><%= student.given_name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   <% end %>

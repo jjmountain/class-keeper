@@ -1,0 +1,4 @@
+one:
+  email: "one@example.com"
+  given_name: "One"
+  family_name: "Student"
