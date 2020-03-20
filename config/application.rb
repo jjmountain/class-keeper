@@ -25,7 +25,7 @@ module ClassKeeper
     # config.action_cable.mount_path = '/websocket'
     # config.action_cable.mount_path = 'redis://localhost:6379/1'
 
-
+   
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
